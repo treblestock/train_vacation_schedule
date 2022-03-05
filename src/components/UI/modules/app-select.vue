@@ -1,9 +1,8 @@
 <template> 
   <select :name='selectName'>
     <option 
-      v-for="(optionText, optionValue) in options"
+      v-for="(optionText, optionValue) in options" :key='optionValue'
       :optionValue='optionValue'
-      :key='optionValue'
       :value='optionValue'
       >{{optionText}}</option>
   </select>
@@ -20,9 +19,11 @@ export default {
       type: Object,
     }
   },
-} 
+}
 </script> 
    
 <style scoped> 
-
+option {
+  background-color: #fff;
+}
 </style>

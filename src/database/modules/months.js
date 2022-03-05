@@ -1,5 +1,4 @@
-
-export const months = {
+export default {
   january: 'Январь',
   february: 'Февраль',
   march: 'Март',

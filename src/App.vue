@@ -1,6 +1,8 @@
 <template>
   <app-header
-    :periodTypes='periodTypes'></app-header>
+    :periodTypes='periodTypes'
+    :months='months'
+    ></app-header>
   <app-table></app-table>
 </template>
 
@@ -8,21 +10,37 @@
 import AppHeader from '@/components/app-header.vue'
 import AppTable from '@/components/app-table.vue'
 
+// Directives
+import relativePosition from '@/components/directives/relativePosition.js'
+import translate from '@/components/directives/translate.js'
+// Database 
+
+
 export default {
   components: {
     AppHeader,
     AppTable,
   },
+  directives: {
+    pos: relativePosition,
+    translate,
+  },
   data() {
     return {
-      periodTypes: {
-        illnes: 'Больничный',
-        vacation: 'Отпуск',
-      },
+      periodTypes: {},
+      months: {},
     }
   },
   methods: {
     
+  },
+  mounted() {
+    import('@/database/index.js')
+      .then(modules => {
+        this.periodTypes = modules.periodTypes
+        this.months = modules.months
+      })
+      .catch(e => console.log(e) )
   }
 }
 </script>
@@ -78,7 +96,7 @@ button {
 }
 button:hover,
 button:focus {
-  background-color: #666;
+  background-color: coral;
 }
 
 select {
@@ -88,7 +106,7 @@ select {
 select:hover,
 select:active,
 select:focus {
-  background-color: #eee;
+  background-color: coral;
 }
 
 

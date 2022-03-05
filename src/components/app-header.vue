@@ -5,7 +5,10 @@
       <button class="btn__reset">Отмена</button>
     </div>
 
-    <table-sort-filter :periodTypes='periodTypes'></table-sort-filter>
+    <table-sort-filter 
+      :periodTypes='periodTypes'
+      :months='months'
+    ></table-sort-filter>
   </header>
 </template> 
  
@@ -17,6 +20,9 @@ export default {
   },
   props: {
     periodTypes: {
+      type: Object,
+    },
+    months: {
       type: Object,
     },
   },
