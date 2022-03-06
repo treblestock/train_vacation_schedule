@@ -1,8 +1,6 @@
 <template>
   <app-header
-    :periodTypes='periodTypes'
-    :months='months'
-    ></app-header>
+  ></app-header>
   <app-table></app-table>
 </template>
 
@@ -27,21 +25,12 @@ export default {
   },
   data() {
     return {
-      periodTypes: {},
-      months: {},
+
     }
   },
   methods: {
-    
+
   },
-  mounted() {
-    import('@/database/index.js')
-      .then(modules => {
-        this.periodTypes = modules.periodTypes
-        this.months = modules.months
-      })
-      .catch(e => console.log(e) )
-  }
 }
 </script>
 
@@ -73,12 +62,13 @@ font-size: 18px;
 -moz-text-size-adjust: 100%;
 -webkit-text-size-adjust: 100%;
 }
-input,button,textarea{font-family:inherit;}
+input,button,textarea,select,option{display: inline-block; background: none; cursor: pointer; font-family:inherit; font-size: inherit; line-height: inherit; color: inherit}
 
 input::-ms-clear{display: none;}
-button{background: transparent; cursor: pointer; font-size: inherit;color: inherit}
+input[type=checkbox], input[type=radio] {cursor: pointer;}
+label {cursor: pointer;}
 button::-moz-focus-inner {padding:0;border:0;}
-a, a:visited{text-decoration: none;color: inherit}
+a {text-decoration: none;color: inherit}
 a:hover{text-decoration: none;color: inherit}
 ul li{list-style: none;}
 img{vertical-align: top;}
@@ -86,28 +76,27 @@ img{vertical-align: top;}
 h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight: 400;}
 /*--------------------*/
 
+body {
+  line-height: 1.2;
+}
+
 button,
 select {
   min-width: 100px;
-  padding: 10px 20px;
-}
-button {
+  padding: 5px 10px;
   background-color: #eee;
 }
+
 button:hover,
-button:focus {
+select:hover {
   background-color: coral;
 }
 
-select {
-  border: 1px solid #000;
+button:active,
+select:active {
+  background-color: tomato;
 }
 
-select:hover,
-select:active,
-select:focus {
-  background-color: coral;
-}
 
 
 </style>

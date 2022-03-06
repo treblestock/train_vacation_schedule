@@ -5,10 +5,7 @@
       <button class="btn__reset">Отмена</button>
     </div>
 
-    <table-sort-filter 
-      :periodTypes='periodTypes'
-      :months='months'
-    ></table-sort-filter>
+    <table-sort-filter></table-sort-filter>
   </header>
 </template> 
  

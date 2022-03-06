@@ -10,17 +10,18 @@
 
     <with-popup v-show='true' :="$attrs">
       <template v-slot:element>
-        <button type="button" @click='isShowOptions = !isShowOptions'>Что-то v</button>
+        <button type="button" @click='isShowOptions = !isShowOptions'>
+          <span class='arrow'>{{selectName}}</span>
+        </button>
       </template>
       <template v-slot:popup >
-        <div class='grid' v-show='isShowOptions'
-          v-pos:absolute="{bottom: '-10px', left: '0px'}"
-          v-translate="{x: '-50%', y: '100%'}"
+        <div @click='toggleActive()' class='grid' v-show='isShowOptions'
+          v-pos:absolute="{bottom: '-10px', left: '100%'}"
+          v-translate="{x: '-100%', y: '100%'}"
         >
-          <button type='button' 
+          <div class='option' 
             v-for="(optionText, optionValue) in options" :key="optionValue"
-            @click='toggleActive'
-          >{{optionText}}</button>
+          >{{optionText}}</div>
         </div>
       </template>
     </with-popup>
@@ -65,8 +66,7 @@ export default {
   },
   methods: {
     toggleActive() {
-      const target = event.target
-      target.classList.toggle('_active')
+      event.target.classList.toggle('_active')
     }
   },
   mounted() { 
@@ -84,8 +84,23 @@ export default {
   grid-template-columns: repeat( var(--columns), auto);
 
 }
-
-._active{
+.option {
+  min-width: 100px;
+  padding: 5px 10px;
+  background-color: #eee;
+}
+.option:hover {
   background-color: coral;
 }
+
+.arrow:after {
+  content: '\02C5';
+  font-weight: 700;
+  margin-left: 10px;
+}
+
+._active{
+  background-color: tomato;
+}
+
 </style>

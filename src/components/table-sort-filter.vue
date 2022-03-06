@@ -13,7 +13,7 @@
     <multiple-select
       selectName="month"
       :options='months'
-      :columns='2'
+      :columns='3'
       @change='onSelectMonth'
     ></multiple-select>
   </form> 
@@ -28,16 +28,12 @@ export default {
     
   },
   props: {
-    periodTypes: {
-      type: Object,
-    },
-    months: {
-      type: Object,
-    },
+
   },
   data() {
     return {
-      
+      periodTypes: {},
+      months: {},
     }
   },
   methods: {
@@ -57,6 +53,14 @@ export default {
       console.log(selectedPeriodTypeRu)
     },
   },
+  mounted() {
+    import('@/database/index.js')
+      .then(modules => {
+        this.periodTypes = modules.periodTypes
+        this.months = modules.months
+      })
+      .catch(e => console.log(e) )
+  }
 } 
 </script> 
    
