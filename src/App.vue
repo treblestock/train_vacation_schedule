@@ -12,6 +12,7 @@ import AppTable from '@/components/app-table.vue'
 import relativePosition from '@/components/directives/relativePosition.js'
 import translate from '@/components/directives/translate.js'
 // Database 
+import {workersRecords} from '@/database/index.js'
 
 
 export default {
@@ -25,12 +26,15 @@ export default {
   },
   data() {
     return {
-
+      workersRecords,
     }
   },
   methods: {
 
   },
+  mounted() {
+    
+  }
 }
 </script>
 
