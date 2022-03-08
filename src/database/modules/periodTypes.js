@@ -1,4 +1,4 @@
 export default {
-  illnes: 'Больничный',
+  illness: 'Больничный',
   vacation: 'Отпуск',
 }

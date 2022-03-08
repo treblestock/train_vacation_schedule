@@ -1,7 +1,13 @@
 <template>
   <app-header
+    @on-queries-changed='onQueriesChanged'
   ></app-header>
-  <app-table></app-table>
+  <app-table
+    :records='formatedWorkersRecords'
+    :searchQueries='searchQueries'
+    @on-ceil-clicked='onCeilCliked'
+  ></app-table>
+  
 </template>
 
 <script>
@@ -11,9 +17,12 @@ import AppTable from '@/components/app-table.vue'
 // Directives
 import relativePosition from '@/components/directives/relativePosition.js'
 import translate from '@/components/directives/translate.js'
+
 // Database 
 import {workersRecords} from '@/database/index.js'
 
+// Helpers
+import {toDateArray} from '@/helpers/date.js'
 
 export default {
   components: {
@@ -27,13 +36,34 @@ export default {
   data() {
     return {
       workersRecords,
+      searchQueries: {
+        month: 'january',
+        type: 'vacation',
+      },
     }
   },
   methods: {
-
+    onCeilCliked(dateData) {
+      this.modifyDate(dateData)
+    },
+    modifyDate({workerId, dateStamp}) {
+      const workerRecrord = this.workersRecords.find(workerRecrord => workerRecrord._id == workerId)
+      // console.log(workerRecrord)
+    },
+    onQueriesChanged(newQueries) {
+      this.searchQueries = newQueries
+    }
+  },
+  computed: {
+    formatedWorkersRecords() {
+      for (const workerRecord of this.workersRecords) {
+        workerRecord.periods = workerRecord.periods.map(period => toDateArray(period, workerRecord._id) )
+        workerRecord.periods = workerRecord.periods.flat()
+      }
+      return this.workersRecords
+    },
   },
   mounted() {
-    
   }
 }
 </script>

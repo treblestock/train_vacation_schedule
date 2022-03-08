@@ -2,24 +2,24 @@
 // const WORKER_SECOND_NAMES = ["Trump", "Vitkovich", "Green", "Smith"]
 
 const WORKER_NAMES = [
-  'Elen Ann',
-  'George George',
-  'Michel Michel',
-  'George Ann',
-  'Elen George',
-  'Ann Elen',
-  'Elen Michel',
-  'Ann Ann',
-  'George Michel',
-  'Michel George',
-  'Elen Elen',
-  'Ann George',
-  'Michel Ann',
-  'George Elen',
-  'Michel Elen',
-  'Ann Michel',
+  'Elen Trump',
+  'George Trump',
+  'Michel Trump',
+  'George Trump',
+  'Elen Vitkovich',
+  'Ann Vitkovich',
+  'Elen Vitkovich',
+  'Ann Vitkovich',
+  'George Green',
+  'Michel Green',
+  'Elen Green',
+  'Ann Green',
+  'Michel Smith',
+  'George Smith',
+  'Michel Smith',
+  'Ann Smith',
 ]
-const PERIOD_TYPES = ["vacation", "illnes"]
+const PERIOD_TYPES = ["vacation", "illness"]
 const PERIOD_DATES = [
   '11.4-21.4',   '11.4-21.4',   '7.11-20.11',  '25.8-3.9',   '20.8-24.8',
   '26.5-6.6',    '14.10-16.10', '23.9-6.10',   '15.4-24.4',  '5.6-13.6', 

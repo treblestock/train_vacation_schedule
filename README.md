@@ -1,4 +1,4 @@
-# vacation-and-illnes-schedule
+# vacation-and-illness-schedule
 
 ## Project setup
 ```

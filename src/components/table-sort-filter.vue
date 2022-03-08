@@ -3,24 +3,22 @@
     <app-select
       selectName="month"
       :options='months'
-      @change='onSelectMonth'
+      @change='onSelectedMonth'
       ></app-select>
     <app-select
       selectName="periodType"
       :options='periodTypes'
-      @change='onSelectPeriodType'
+      @change='onSelectedPeriodType'
       ></app-select>
     <multiple-select
       selectName="month"
       :options='months'
       :columns='3'
-      @change='onSelectMonth'
     ></multiple-select>
   </form> 
 </template> 
  
 <script>
-// import {months} from '@/database/index.js' // local component database query 
 
 
 export default { 
@@ -37,20 +35,13 @@ export default {
     }
   },
   methods: {
-    onSelectMonth() {
-      // filler
-      const select = event.target
-      const selectedMonthValue = select.selectedOptions[0].value
-      const selectedMonthRu = select.selectedOptions[0].text
-      const selectedMonthInd = select.selectedOptions[0].index
-      console.log(selectedMonthInd, selectedMonthValue, selectedMonthRu)
+    onSelectedMonth() {
+      const selectedMonth = event.target.selectedOptions[0].value
+      this.$emit('onMonthQuery', selectedMonth)
     },
-    onSelectPeriodType() {
-      // filler
-      const select = event.target
-      const selectedPeriodType = select.value
-      const selectedPeriodTypeRu = select.selectedOptions[0].text
-      console.log(selectedPeriodTypeRu)
+    onSelectedPeriodType() {
+      const selectedPeriodType = event.target.selectedOptions[0].value
+      this.$emit('onTypeQuery', selectedPeriodType)
     },
   },
   mounted() {

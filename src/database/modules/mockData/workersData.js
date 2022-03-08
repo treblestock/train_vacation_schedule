@@ -6,7 +6,7 @@ const getRandom = (from = 0, to) => from + Math.floor(Math.random() * (to + 1) )
 
 const periodContract = {
   dates: '12.03-14.08',
-  type: 'illness',
+  type: 'illnesss',
   isNew: false,
   isProved: false,
 }
