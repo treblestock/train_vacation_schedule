@@ -19,12 +19,12 @@ export default {
     TableSortFilter,
   },
   props: {
-    periodTypes: {
-      type: Object,
-    },
-    months: {
-      type: Object,
-    },
+    // dateTypes: {
+    //   type: Object,
+    // },
+    // months: {
+    //   type: Object,
+    // },
   },
   data() {
     return {

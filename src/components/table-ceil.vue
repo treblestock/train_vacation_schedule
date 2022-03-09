@@ -8,15 +8,9 @@
 <script> 
 export default { 
   props: {
-    date: {
-      type: Date
-    },
     dateType: {
       type: String,
     },
-    workerId: {
-      type: Number || String,
-    }
   },
   computed: {
     currentColor() {

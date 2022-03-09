@@ -6,8 +6,8 @@
         v-for="record in recordsFilteredWorkers" :key="record"
         :datesInMonth='datesInMonth'
         :workerId='record._id'
-        :recordHeader='record.name'
-        :workerDates='record.periods'
+        :rowHeader='record.name'
+        :workerDates='record.dates'
         :searchQueries='searchQueries'
 
         @mousedown='onCeilCliked'
@@ -18,9 +18,9 @@
  
 <script>
     // <header-row
-    //   :recordHeader='"Рабочие / " + searchQueries.month + ":"'
+    //   :rowHeader='"Рабочие / " + searchQueries.month + ":"'
     //   :workerId='1'
-    //   :periods=''
+    //   :dates=''
     //   :searchQueries='searchQueries'
     // ></header-row>
 import HeaderRow from '@/components/header-row.vue'
@@ -52,8 +52,8 @@ export default {
   },
   methods: {
     onCeilCliked(evnt) {
-      const [workerId, dateDateStamp] = event.target.id.split(' ')
-      this.$emit('onCeilClicked', {workerId, dateDateStamp,})
+      const [workerId, dateStamp] = event.target.id.split(' ')
+      this.$emit('onCeilClicked', {workerId, dateStamp})
     },
   },
   mounted() {

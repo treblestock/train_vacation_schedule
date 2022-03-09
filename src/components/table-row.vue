@@ -1,12 +1,10 @@
 <template> 
    <div class="table__row">
-    <div class="row__header" :id='workerId'>{{recordHeader}}</div>
+    <div class="row__header" :id='workerId'>{{rowHeader}}</div>
     <div class="row__body">
       <table-ceil
         v-for="date in datesInMonth" :key="date"
-        :date='date'
         :dateType="findDateRecord(date, workerId)?.dateType"
-        :workerId='workerId'
         
         :id='`${workerId} ${date.getTime()}`'
       >{{date.getDate()}}</table-ceil>
@@ -18,7 +16,7 @@
 import TableCeil from '@/components/table-ceil.vue'
 
 // Helpers
-import {toDateArray, monthNumber} from '@/helpers/date.js'
+import {monthNumber} from '@/helpers/date.js'
 
 export default {
   components: {
@@ -28,7 +26,7 @@ export default {
     datesInMonth: {
       type: Array,
     },
-    recordHeader: {
+    rowHeader: {
       type: String,
     },
     workerId: {
@@ -46,23 +44,20 @@ export default {
       month: this.searchQueries.month,
       type: this.searchQueries.type,
 
-      periodDate: {},
+      dateDate: {},
     }
   },
   methods: {
-    toDateArray,
     findDateRecord(dateInMonth, workerId) {
       return this.workerDates.find(dateRecord => dateRecord.date.getTime() === dateInMonth.getTime() &&
        dateRecord.workerId === workerId)
     }
   },
   computed: {
-    periodsFilteredMonth() {
-      console.log('here')
+    datesFilteredMonth() {
       if(!this.month) this.workerDates
       const requiredMonth = this.month
       const requiredMonthNumber = monthNumber[requiredMonth]
-
       return this.workerDates.filter(dateObj => dateObj.date.getMonth() == requiredMonthNumber)
     },
   },

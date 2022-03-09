@@ -6,8 +6,8 @@
       @change='onSelectedMonth'
       ></app-select>
     <app-select
-      selectName="periodType"
-      :options='periodTypes'
+      selectName="dateType"
+      :options='dateTypes'
       @change='onSelectedPeriodType'
       ></app-select>
     <multiple-select
@@ -30,7 +30,7 @@ export default {
   },
   data() {
     return {
-      periodTypes: {},
+      dateTypes: {},
       months: {},
     }
   },
@@ -47,7 +47,7 @@ export default {
   mounted() {
     import('@/database/index.js')
       .then(modules => {
-        this.periodTypes = modules.periodTypes
+        this.dateTypes = modules.periodTypes
         this.months = modules.months
       })
       .catch(e => console.log(e) )

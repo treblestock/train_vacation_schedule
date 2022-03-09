@@ -34,7 +34,6 @@ function toStringFormat(dateObj) {
 
 
 
-
 const monthNumber = {
   january: 0,
   february: 1,

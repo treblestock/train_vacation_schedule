@@ -1,9 +1,9 @@
 <template> 
    <div class="header-row">
     <table-row
-      :recordHeader='recordHeader'
+      :rowHeader='rowHeader'
       :workerId='workerId'
-      :periods='periods'
+      :dates='dates'
       :searchQueries='searchQueries'
     ></table-row>
   </div>
@@ -17,13 +17,13 @@ export default {
     TableRow,
   },
   props: {
-    recordHeader: {
+    rowHeader: {
       type: String,
     },
     workerId: {
       type: Number,
     },
-    periods: {
+    dates: {
       type: Array,
     },
     searchQueries: {
