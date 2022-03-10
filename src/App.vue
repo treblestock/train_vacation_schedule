@@ -65,7 +65,7 @@ export default {
     onCeilCliked({workerId, dateStamp}) {
       const dateRecord = this.findDateRecord(workerId,dateStamp)
       if (!dateRecord) {
-        
+        workersRecords.addDateRecord()
         return 
       }
       console.log(

@@ -53,15 +53,15 @@ class WorkerRecordsBase {
   findWorkerRecord(workerId) {
     return this.records.find(rec => rec._id == workerId)
   }
-  addDateRecord(dateRecord, workerId) {
+  addDateRecord(workerId, dateRecord) {
     const wRecord = this.findWorkerRecord(workerId)
     wRecord.push(dateRecord)
   }
-  rmDateRecord(dateRecord, workerId) {
+  rmDateRecord(workerId, dateRecord) {
     const wRecord = this.findWorkerRecord(workerId)
     wRecord.filter(rec => rec !== dateRecord)
   }
-  findDateRecord(dateStamp, workerId) {
+  findDateRecord(workerId, dateStamp) {
     const wRecord = this.findWorkerRecord(workerId)
     return wRecord.find(rec => rec._id == dateStamp)
   }
