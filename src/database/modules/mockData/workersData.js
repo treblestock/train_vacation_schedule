@@ -1,4 +1,4 @@
-import { WORKER_NAMES, PERIOD_DATES, PERIOD_TYPES } from "./constants.js"
+import { WORKER_NAMES, PERIOD_DATES, PERIOD_TYPES } from "./mochConstants.js"
 import { unifyPeriodsByDates } from "../../../helpers/mockData.js"
 // const { WORKER_NAMES, PERIOD_DATES, PERIOD_TYPES } = require("./constants.js")
 const getRandom = (from = 0, to) => from + Math.floor(Math.random() * (to + 1) )
@@ -53,6 +53,7 @@ class WorkerRecordsBase {
   findWorkerRecord(workerId) {
     return this.records.find(rec => rec._id == workerId)
   }
+  
   addDateRecord(workerId, dateRecord) {
     const wRecord = this.findWorkerRecord(workerId)
     wRecord.push(dateRecord)

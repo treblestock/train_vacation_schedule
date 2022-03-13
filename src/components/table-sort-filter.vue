@@ -47,8 +47,8 @@ export default {
   mounted() {
     import('@/database/index.js')
       .then(modules => {
-        this.dateTypes = modules.periodTypes
-        this.months = modules.months
+        this.dateTypes = modules.PERIOD_TYPES
+        this.months = modules.MONTHS
       })
       .catch(e => console.log(e) )
   }

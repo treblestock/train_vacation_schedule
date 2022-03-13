@@ -1,4 +1,4 @@
-export default {
+const MONTHS = {
   january: 'Январь',
   february: 'Февраль',
   march: 'Март',
@@ -13,4 +13,12 @@ export default {
   december: 'Декабрь',
 }
 
-// export {months}
+const PERIOD_TYPES = {
+  illness: 'Больничный',
+  vacation: 'Отпуск',
+}
+
+export { 
+  MONTHS,
+  PERIOD_TYPES,
+}
