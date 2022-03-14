@@ -1,106 +1,120 @@
 import { WORKER_NAMES, PERIOD_DATES, PERIOD_TYPES } from "./mochConstants.js"
 import { unifyPeriodsByDates } from "../../../helpers/mockData.js"
-// const { WORKER_NAMES, PERIOD_DATES, PERIOD_TYPES } = require("./constants.js")
+// const { WORKER_NAMES, PERIOD_DATES, PERIOD_TYPES } = require("./mochConstants.js")
 const getRandom = (from = 0, to) => from + Math.floor(Math.random() * (to + 1) )
+const getRandomConstant = constants => constants[getRandom(0, constants.length - 1) ]
 
 
 
-const periodExample = {
-  dates: '12.03-14.08',
-  type: 'illnesss',
-  isNew: false,
-  isProved: false,
+class WorkerRecord {
+  static currentId = 0
+  constructor({ name, dateRecords }) {
+    this._id = ++WorkerRecord.currentId
+    this.name = name
+    this.dateRecords = dateRecords
+  }
+}
+class WorkerRecords {
+  constructor(records) {
+    this.records = records
+  }
 }
 
-const workersExample = [
-  {
-    name: 'Vasiliy Petrovich',
-    _id: '',
-    periods: ['period'],
-  },
-]
 
+class DateRecord {
+  static currentId = 0
 
-
-
-
-class Period {
-  constructor({ dates, type, isNew, isProven }) {
-    this.dates = dates
+  constructor({ date, type, isNew, isProven }) {
+    this._id = ++DateRecord.currentId
+    this.date = date
     this.type = type
     this.isNew = isNew
     this.isProven = isProven
   }
 }
-class WorkerRecord {
-  static currentId = 0
-  constructor({ name, periods }) {
-    this._id = ++WorkerRecord.currentId
-    this.name = name
-    this.periods = periods
-  }
-}
-class WorkerRecordsBase {
+class DateRecords {
   constructor(records) {
     this.records = records
   }
-  addWorkerRecord(workerRecord) {
-    this.records.push(workerRecord)
-  }
-  rmWorkerRecord(workerRecord) {
-    this.records.filter(rec => rec !== workerRecord)
-  }
-  findWorkerRecord(workerId) {
-    return this.records.find(rec => rec._id == workerId)
-  }
-  
-  addDateRecord(workerId, dateRecord) {
-    const wRecord = this.findWorkerRecord(workerId)
-    wRecord.push(dateRecord)
-  }
-  rmDateRecord(workerId, dateRecord) {
-    const wRecord = this.findWorkerRecord(workerId)
-    wRecord.filter(rec => rec !== dateRecord)
-  }
-  findDateRecord(workerId, dateStamp) {
-    const wRecord = this.findWorkerRecord(workerId)
-    return wRecord.find(rec => rec._id == dateStamp)
-  }
 }
 
 
-function PeriodFabric(count = 1) {
-  const periods = []
-  const unicPeriodParametrs = getSetOfUnicPeriodParametrs(count)
 
-  unicPeriodParametrs.forEach(par => periods.push(new Period(par)))
-  return periods
+const parseDayAndMonth = (periodStr) => {
+  let [day, month] = periodStr.split('.')
+  return [--month, day]
 }
+const dateFromDayMonth = (month, day) => new Date( Date.UTC(2021, month, day) )
+const dayMonthFromDate = (date) => [date.getMonth(), date.getDate()]
 
-function getSetOfUnicPeriodParametrs(maxCount) {
+const periodToDates = (periodStr) => {
+  const dates = []
+  let [startString, endString] = periodStr.split('-')
+
+  let [currentMonth, currentDay] = parseDayAndMonth(startString)
+  const endDate = dateFromDayMonth(...parseDayAndMonth(endString) )
+
+  while (true) {
+    let currentDate = dateFromDayMonth(currentMonth, currentDay++)
+    dates.push(currentDate)
+    if (currentDate.getTime() == endDate.getTime() ) break
+  }
+  return dates
+} 
+
+function getSetOfUnicPeriods (count = 1) {
   let datesSet = new Set()
-  for (let i = 0; i < maxCount; i++) {
-    const period = PERIOD_DATES[getRandom(0, (PERIOD_DATES.length - 1) ) ]
+  while (datesSet.size < count) {
+    const period = getRandomConstant(PERIOD_DATES)
     datesSet.add(period)
   }
-  let datesArray = [...datesSet].map(dates => {
-    return {
-      dates,
-      type: PERIOD_TYPES[getRandom(0, (PERIOD_TYPES.length - 1) )],
-      isNew: true,  
-      isProven: true,
-    }
-  })
-  return datesArray
+
+  return [...datesSet]
 }
 
-function WorkerRecordFabric(countOfPeriods) {
-  const workersRecords = []
-  for (const name of WORKER_NAMES) {
-    const record = new WorkerRecord({ name, periods: PeriodFabric(countOfPeriods) })
-    workersRecords.push(record)
+const getRandomDates = () => {
+  const dates = []
+  const length = getRandom(5, 14)
+  const startDate = new Date( 2021, 0, getRandom(0, 340) )
+  let [currentMonth, currentDay] = dayMonthFromDate(startDate)
+
+  if (startDate.getFullYear() != 2021) return getRandomDates()
+  
+  for (let i = 0; i < length; i++) {
+    const currentDate = new Date(Date.UTC(2021, currentMonth, currentDay++) )
+    dates.push(currentDate)
   }
-  return new WorkerRecordsBase(workersRecords)
+  return dates
+}
+
+
+
+
+function dateRecordsFabric(periodsCount = 1) {
+  const periods = []
+  for (let i = 0; i < periodsCount; i++) {
+    const type = getRandomConstant(PERIOD_TYPES)
+    const dates = getRandomDates()
+
+    const dateRecords = dates.map(date => new DateRecord(
+      {date, type, isNew: false, isProven:true}
+    ))
+    periods.push(dateRecords)
+  }
+  const dateRecords = new DateRecords(periods.flat() )
+  dateRecords.records = getUnicDateRecords(dateRecords.records)
+  return dateRecords
+}
+
+
+
+function WorkerRecordsFabric(countOfPeriods) {
+  const workerRecords = []
+  for (const name of WORKER_NAMES) {
+    const record = new WorkerRecord({ name, dateRecords: dateRecordsFabric(countOfPeriods) })
+    workerRecords.push(record)
+  }
+  return new WorkerRecords(workerRecords)
 }
 
 
@@ -109,12 +123,49 @@ function WorkerRecordFabric(countOfPeriods) {
 
 
 
-const workersRecords = WorkerRecordFabric( Math.floor(PERIOD_DATES.length * 0.1) )
-unifyPeriodsByDates(workersRecords.records)
+
+
+const workerRecords = WorkerRecordsFabric( Math.floor(PERIOD_DATES.length * 0.15) )
+
+
+// unifyPeriodsByDates(workerRecords.records)
+
+
+export { workerRecords }
 
 
 
-export { workersRecords }
+// helpers 
+function getUnicItemsByValue(arr, value) {
+  const res = []
+  arr.forEach(item => {
 
+    res.find(i => i[value] === item[value] ) ? false : res.push(item)
+  })
+  return res
+}
+function getReps(arr, value) {
+  const unic = getUnicItemsByValue(arr, value)
+  return getDiffByValue(arr, unic)
+} 
 
+function getDiffByValue(arr1, arr2) {
+  return arr1.filter(item => !~arr2.indexOf(item) )
+  // return arr.filter(item => !unic.find(i => i === item) )
+}
 
+function hasReps(arr, value) {
+  return !!getReps(arr, value).length
+}
+
+function makeUnicArr(arr) {
+  return [...new Set(arr)]
+}
+function getUnicDateRecords(dateRecords) {
+  const res = []
+  for (const rec of dateRecords) {
+    const dateStamp = rec.date.getTime()
+    res.includes(dateStamp ) ? false : (res.push(rec), res.push(dateStamp) )
+  }
+  return res
+}

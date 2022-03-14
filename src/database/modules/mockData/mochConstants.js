@@ -63,12 +63,10 @@ const PERIOD_DATES = [
 ]
 
 
-// browser export
-export {WORKER_NAMES, PERIOD_TYPES, PERIOD_DATES}
-
-// node.js export
-// module.exports = {
-//   WORKER_NAMES,
-//   PERIOD_TYPES,
-//   PERIOD_DATES,
-// }
+// module.exports =
+export 
+{
+  WORKER_NAMES,
+  PERIOD_TYPES,
+  PERIOD_DATES,
+}

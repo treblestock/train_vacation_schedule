@@ -34,7 +34,9 @@ function unifyPeriodsByDates(setOfRecords) {
   }
 }
 
-export {
+export
+// module.export = 
+{
   getUnicItemsByValue,
   getReps,
   getDiffByValue,

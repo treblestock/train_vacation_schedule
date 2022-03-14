@@ -19,7 +19,8 @@ import relativePosition from '@/components/directives/relativePosition.js'
 import translate from '@/components/directives/translate.js'
 
 // Database 
-import {workersRecords} from '@/database/index.js'
+import { workerRecords } from '@/database/index.js'
+console.log(workerRecords)
 
 // Helpers
 import {getReps} from '@/helpers/mockData.js'
@@ -36,7 +37,7 @@ export default {
   },
   data() {
     return {
-      workersRecords: workersRecords.records,
+      workerRecords: workerRecords.records,
       searchQueries: {
         month: 'january',
         type: 'vacation',
@@ -45,12 +46,12 @@ export default {
   },
   computed: {
     formatedWorkersRecords() {
-      for (const workerRecord of this.workersRecords) {
-        workerRecord.dates = workerRecord.periods.map(period => toDateArray(period, workerRecord._id) ).flat()
-        delete workerRecord.periods
+      // for (const workerRecord of this.workerRecords) {
+      //   workerRecord.dates = workerRecord.dateRecords.map(period => toDateArray(period, workerRecord._id) ).flat()
+      //   delete workerRecord.dateRecords
 
-      }
-      return this.workersRecords
+      // }
+      return this.workerRecords
     },
   },
   watch: {
@@ -65,7 +66,7 @@ export default {
     onCeilCliked({workerId, dateStamp}) {
       const dateRecord = this.findDateRecord(workerId,dateStamp)
       if (!dateRecord) {
-        workersRecords.addDateRecord()
+        workerRecords.addDateRecord()
         return 
       }
       console.log(
@@ -77,7 +78,7 @@ export default {
       
     },
     modifyDate({workerId, dateStamp}) {
-      const workerRecrord = this.workersRecords.find(workerRecrord => workerRecrord._id == workerId)
+      const workerRecrord = this.workerRecords.find(workerRecrord => workerRecrord._id == workerId)
       // console.log(workerRecrord)
     },
     onQueriesChanged(newQueries) {
@@ -85,18 +86,19 @@ export default {
     },
     findDateRecord(workerId, dateStamp) {
       const workerRecord = this.formatedWorkersRecords.find(workerRecord => workerRecord._id == workerId)
-      return workerRecord.dates.find(dateRecord => dateRecord.date.getTime() == dateStamp)
+      return workerRecord.dateRecords.find(dateRecord => dateRecord.date.getTime() == dateStamp)
     },
 
     globalRecordsCheck() {
-      const repsOfWorkerId = getReps(workersRecords.records, '_id')
+      const repsOfWorkerId = getReps(workerRecords.records, '_id')
       if(repsOfWorkerId.length) {
         console.log(repsOfWorkerId)
         throw new Error('non non-unic worker IDs')
       }
 
-      for (const rec of workersRecords.records) {
-        const repsOfDate = getReps(rec.dates, 'date')
+      for (const rec of workerRecords.records) {
+        console.log(rec.dateRecords)
+        const repsOfDate = getReps(rec.dateRecords, 'date')
         if(repsOfDate.length) {
           console.log(repsOfDate)
           throw new Error('non non-unic worker IDs')
