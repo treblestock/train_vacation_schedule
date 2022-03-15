@@ -20,7 +20,7 @@ import translate from '@/components/directives/translate.js'
 
 // Database 
 import { workerRecords } from '@/database/index.js'
-console.log(workerRecords)
+
 
 // Helpers
 import {getReps} from '@/helpers/mockData.js'
@@ -37,10 +37,10 @@ export default {
   },
   data() {
     return {
-      workerRecords: workerRecords.records,
+      workerRecords: workerRecords,
       searchQueries: {
         month: 'january',
-        type: 'vacation',
+        dateType: 'vacation',
       },
     }
   },
@@ -79,7 +79,6 @@ export default {
     },
     modifyDate({workerId, dateStamp}) {
       const workerRecrord = this.workerRecords.find(workerRecrord => workerRecrord._id == workerId)
-      // console.log(workerRecrord)
     },
     onQueriesChanged(newQueries) {
       this.searchQueries = newQueries
@@ -90,18 +89,21 @@ export default {
     },
 
     globalRecordsCheck() {
-      const repsOfWorkerId = getReps(workerRecords.records, '_id')
+      const repsOfWorkerId = getReps(workerRecords, '_id')
       if(repsOfWorkerId.length) {
         console.log(repsOfWorkerId)
         throw new Error('non non-unic worker IDs')
       }
 
-      for (const rec of workerRecords.records) {
-        console.log(rec.dateRecords)
-        const repsOfDate = getReps(rec.dateRecords, 'date')
+      for (const wRec of workerRecords) {
+        const repsOfDate = getReps(wRec.dateRecords, 'date')
         if(repsOfDate.length) {
           console.log(repsOfDate)
           throw new Error('non non-unic worker IDs')
+        }
+
+        for (const dRec of wRec.dateRecords) {
+          dRec.date = new Date(dRec.date)
         }
       }
     },

@@ -34,7 +34,7 @@ export default {
   },
   props: {
     records: {
-      type: Object,
+      type: Array,
     },
     searchQueries: {
       type: Object,

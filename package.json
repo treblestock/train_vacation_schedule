@@ -4,10 +4,12 @@
   "private": true,
   "scripts": {
     "serve": "set NODE_OPTIONS=--openssl-legacy-provider && vue-cli-service serve",
+    "test": "jest",
     "build": "vue-cli-service build"
   },
   "dependencies": {
     "core-js": "^3.6.5",
+    "jest": "^27.5.1",
     "vue": "^3.0.0"
   },
   "devDependencies": {

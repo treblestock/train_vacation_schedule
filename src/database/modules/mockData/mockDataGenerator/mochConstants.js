@@ -19,7 +19,7 @@ const WORKER_NAMES = [
   "Michel Smith",
   "Ann Smith",
 ]
-const PERIOD_TYPES = ["vacation", "illness"]
+const DATE_TYPES = ["vacation", "illness"]
 const PERIOD_DATES = [
   '26.5-6.6',    '14.10-16.10', '15.4-24.4',  '5.6-13.6',    '1.10-3.10',
   '24.7-7.8',    '25.5-3.6',    '1.9-16.9',    '12.1-18.1',  '26.6-2.7',
@@ -63,10 +63,10 @@ const PERIOD_DATES = [
 ]
 
 
-// module.exports =
-export 
+module.exports =
+// export 
 {
   WORKER_NAMES,
-  PERIOD_TYPES,
+  DATE_TYPES,
   PERIOD_DATES,
 }
