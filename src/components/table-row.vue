@@ -4,7 +4,7 @@
     <div class="row__body">
       <table-ceil
         v-for="date in datesInMonth" :key="date"
-        :dateType="findDateRecord(date, workerId)?.dateType"
+        :dateType="findDateRecordByDate(date)?.dateType"
         
         :id='`${workerId} ${date.getTime()}`'
       >{{date.getDate()}}</table-ceil>
@@ -32,7 +32,7 @@ export default {
     workerId: {
       type: Number,
     },
-    workerDates: {
+    dateRecords: {
       type: Array,
     },
     searchQueries: {
@@ -48,17 +48,19 @@ export default {
     }
   },
   methods: {
-    findDateRecord(dateInMonth, workerId) {
-      return this.workerDates.find(dateRecord => dateRecord.date.getTime() === dateInMonth.getTime() &&
-       dateRecord.workerId === workerId)
+    findDateRecordByDate(dateInMonth) {
+      const date =  this.dateRecords.find(dateRecord => dateRecord.date.getTime() == dateInMonth.getTime() )
+      console.log(this.dateRecords[1].date.getTime() )
+      // console.log(this.dateRecords[1].date.getTime() == this.datesInMonth[1].getTime() )
+      return date
     }
   },
   computed: {
     datesFilteredMonth() {
-      if(!this.month) this.workerDates
+      if(!this.month) this.dateRecords
       const requiredMonth = this.month
       const requiredMonthNumber = monthNumber[requiredMonth]
-      return this.workerDates.filter(dateObj => dateObj.date.getMonth() == requiredMonthNumber)
+      return this.dateRecords.filter(dateObj => dateObj.date.getMonth() == requiredMonthNumber)
     },
   },
   mounted() {

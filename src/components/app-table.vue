@@ -3,11 +3,12 @@
 
     <div class="table__body">
       <table-row
-        v-for="record in recordsFilteredWorkers" :key="record"
+        v-for="workerRecord in recordsFilteredWorkers" :key="workerRecord" 
+        :workerRecords='workerRecord'
         :datesInMonth='datesInMonth'
-        :workerId='record._id'
-        :rowHeader='record.name'
-        :workerDates='record.dates'
+        :workerId='workerRecord._id'
+        :rowHeader='workerRecord.name'
+        :dateRecords='workerRecord.dateRecords'
         :searchQueries='searchQueries'
 
         @mousedown='onCeilCliked'
