@@ -41,26 +41,19 @@ export default {
   },
   data() {
     return {
-      month: this.searchQueries.month,
-      type: this.searchQueries.type,
-
-      dateDate: {},
     }
   },
   methods: {
     findDateRecordByDate(dateInMonth) {
-      const date =  this.dateRecords.find(dateRecord => dateRecord.date.getTime() == dateInMonth.getTime() )
-      console.log(this.dateRecords[1].date.getTime() )
-      // console.log(this.dateRecords[1].date.getTime() == this.datesInMonth[1].getTime() )
-      return date
+      return this.datesFilteredMonth.find(dateRecord => dateRecord.date.getTime() == dateInMonth.getTime() )
     }
   },
   computed: {
     datesFilteredMonth() {
-      if(!this.month) this.dateRecords
-      const requiredMonth = this.month
+      if(!this.searchQueries.month) this.dateRecords
+      const requiredMonth = this.searchQueries.month
       const requiredMonthNumber = monthNumber[requiredMonth]
-      return this.dateRecords.filter(dateObj => dateObj.date.getMonth() == requiredMonthNumber)
+      return this.dateRecords.filter(dateRecord => dateRecord.date.getMonth() == requiredMonthNumber)
     },
   },
   mounted() {

@@ -19,8 +19,10 @@ import relativePosition from '@/components/directives/relativePosition.js'
 import translate from '@/components/directives/translate.js'
 
 // Database 
-import { workerRecords } from '@/database/index.js'
-
+import { 
+  // workerRecords,
+  workerRecordsJSON ,
+ } from '@/database/index.js'
 
 // Helpers
 import {getReps} from '@/helpers/mockData.js'
@@ -37,7 +39,7 @@ export default {
   },
   data() {
     return {
-      workerRecords: workerRecords,
+      workerRecords: [],
       searchQueries: {
         month: 'january',
         dateType: 'vacation',
@@ -88,7 +90,7 @@ export default {
       return workerRecord.dateRecords.find(dateRecord => dateRecord.date.getTime() == dateStamp)
     },
 
-    globalRecordsCheck() {
+    globalRecordsCheck(workerRecords) {
       const repsOfWorkerId = getReps(workerRecords, '_id')
       if(repsOfWorkerId.length) {
         console.log(repsOfWorkerId)
@@ -104,12 +106,15 @@ export default {
 
         for (const dRec of wRec.dateRecords) {
           dRec.date = new Date(dRec.date)
+          dRec.date.setHours(0)
         }
       }
     },
   },
   beforeMount() {
-    this.globalRecordsCheck()
+    const parsedWorkerRecords = JSON.parse(workerRecordsJSON  )
+    this.globalRecordsCheck(parsedWorkerRecords)
+    this.workerRecords = parsedWorkerRecords
   }
 }
 </script>

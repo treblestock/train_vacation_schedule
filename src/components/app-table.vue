@@ -4,8 +4,8 @@
     <div class="table__body">
       <table-row
         v-for="workerRecord in recordsFilteredWorkers" :key="workerRecord" 
-        :workerRecords='workerRecord'
         :datesInMonth='datesInMonth'
+
         :workerId='workerRecord._id'
         :rowHeader='workerRecord.name'
         :dateRecords='workerRecord.dateRecords'

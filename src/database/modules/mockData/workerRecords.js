@@ -3,8 +3,7 @@ const workerRecords = [
     "_id":1,
     "name":"George Trump",
     "dateRecords":[
-      {"_id":1,
-      "date":"2021-01-01T00:00:00.000Z","dateType":"vacation","isNew":true,"isProven":true},
+      {"_id":1,"date":"2021-01-01T00:00:00.000Z","dateType":"vacation","isNew":true,"isProven":true},
       {"_id":2,"date":"2021-01-02T00:00:00.000Z","dateType":"vacation","isNew":true,"isProven":true},
       {"_id":3,"date":"2021-01-03T00:00:00.000Z","dateType":"vacation","isNew":true,"isProven":true},
       {"_id":4,"date":"2021-01-04T00:00:00.000Z","dateType":"vacation","isNew":true,"isProven":true},
@@ -198,8 +197,7 @@ const workerRecords = [
   "_id":2,
   "name":"Elen Trump",
   "dateRecords":[
-    {"_id":189,
-    "date":"2021-01-01T00:00:00.000Z","dateType":"vacation","isNew":true,"isProven":true},
+    {"_id":189,"date":"2021-01-01T00:00:00.000Z","dateType":"vacation","isNew":true,"isProven":true},
     {"_id":190,"date":"2021-01-02T00:00:00.000Z","dateType":"vacation","isNew":true,"isProven":true},
     {"_id":191,"date":"2021-01-03T00:00:00.000Z","dateType":"vacation","isNew":true,"isProven":true},
     {"_id":192,"date":"2021-01-04T00:00:00.000Z","dateType":"vacation","isNew":true,"isProven":true},
@@ -400,8 +398,7 @@ const workerRecords = [
   "_id":3,
   "name":"Michel Trump",
   "dateRecords":[
-    {"_id":384,
-    "date":"2021-01-01T00:00:00.000Z","dateType":"vacation","isNew":true,"isProven":true},
+    {"_id":384,"date":"2021-01-01T00:00:00.000Z","dateType":"vacation","isNew":true,"isProven":true},
     {"_id":385,"date":"2021-01-02T00:00:00.000Z","dateType":"vacation","isNew":true,"isProven":true},
     {"_id":386,"date":"2021-01-03T00:00:00.000Z","dateType":"vacation","isNew":true,"isProven":true},
     {"_id":387,"date":"2021-01-04T00:00:00.000Z","dateType":"vacation","isNew":true,"isProven":true},
@@ -599,8 +596,7 @@ const workerRecords = [
   "_id":4,
   "name":"Ann Trump",
   "dateRecords":[
-    {"_id":576,
-    "date":"2021-01-01T00:00:00.000Z","dateType":"illness","isNew":true,"isProven":true},
+    {"_id":576,"date":"2021-01-01T00:00:00.000Z","dateType":"illness","isNew":true,"isProven":true},
     {"_id":577,"date":"2021-01-02T00:00:00.000Z","dateType":"illness","isNew":true,"isProven":true},
     {"_id":578,"date":"2021-01-03T00:00:00.000Z","dateType":"illness","isNew":true,"isProven":true},
     {"_id":579,"date":"2021-01-04T00:00:00.000Z","dateType":"illness","isNew":true,"isProven":true},
@@ -796,8 +792,7 @@ const workerRecords = [
   "_id":5,
   "name":"George Vitkovich",
   "dateRecords":[
-    {"_id":766,
-    "date":"2021-01-01T00:00:00.000Z","dateType":"vacation","isNew":true,"isProven":true},
+    {"_id":766,"date":"2021-01-01T00:00:00.000Z","dateType":"vacation","isNew":true,"isProven":true},
     {"_id":767,"date":"2021-01-02T00:00:00.000Z","dateType":"vacation","isNew":true,"isProven":true},
     {"_id":768,"date":"2021-01-03T00:00:00.000Z","dateType":"vacation","isNew":true,"isProven":true},
     {"_id":769,"date":"2021-01-04T00:00:00.000Z","dateType":"vacation","isNew":true,"isProven":true},
@@ -985,8 +980,7 @@ const workerRecords = [
   "_id":6,
   "name":"Elen Vitkovich",
   "dateRecords":[
-    {"_id":948,
-    "date":"2021-01-01T00:00:00.000Z","dateType":"illness","isNew":true,"isProven":true},
+    {"_id":948,"date":"2021-01-01T00:00:00.000Z","dateType":"illness","isNew":true,"isProven":true},
     {"_id":949,"date":"2021-01-02T00:00:00.000Z","dateType":"illness","isNew":true,"isProven":true},
     {"_id":950,"date":"2021-01-07T00:00:00.000Z","dateType":"vacation","isNew":true,"isProven":true},
     {"_id":951,"date":"2021-01-08T00:00:00.000Z","dateType":"vacation","isNew":true,"isProven":true},
@@ -1200,8 +1194,7 @@ const workerRecords = [
   "_id":7,
   "name":"Michel Vitkovich",
   "dateRecords":[
-    {"_id":1156,
-    "date":"2021-01-01T00:00:00.000Z","dateType":"illness","isNew":true,"isProven":true},
+    {"_id":1156,"date":"2021-01-01T00:00:00.000Z","dateType":"illness","isNew":true,"isProven":true},
     {"_id":1157,"date":"2021-01-02T00:00:00.000Z","dateType":"illness","isNew":true,"isProven":true},
     {"_id":1158,"date":"2021-01-03T00:00:00.000Z","dateType":"illness","isNew":true,"isProven":true},
     {"_id":1159,"date":"2021-01-04T00:00:00.000Z","dateType":"illness","isNew":true,"isProven":true},
@@ -1378,8 +1371,7 @@ const workerRecords = [
   "_id":8,
   "name":"Ann Vitkovich",
   "dateRecords":[
-    {"_id":1327,
-    "date":"2021-01-01T00:00:00.000Z","dateType":"illness","isNew":true,"isProven":true},
+    {"_id":1327,"date":"2021-01-01T00:00:00.000Z","dateType":"illness","isNew":true,"isProven":true},
     {"_id":1328,"date":"2021-01-02T00:00:00.000Z","dateType":"illness","isNew":true,"isProven":true},
     {"_id":1329,"date":"2021-01-03T00:00:00.000Z","dateType":"illness","isNew":true,"isProven":true},
     {"_id":1330,"date":"2021-01-04T00:00:00.000Z","dateType":"illness","isNew":true,"isProven":true},
@@ -1575,8 +1567,7 @@ const workerRecords = [
   "_id":9,
   "name":"George Green",
   "dateRecords":[
-    {"_id":1517,
-    "date":"2021-01-01T00:00:00.000Z","dateType":"vacation","isNew":true,"isProven":true},
+    {"_id":1517,"date":"2021-01-01T00:00:00.000Z","dateType":"vacation","isNew":true,"isProven":true},
     {"_id":1518,"date":"2021-01-02T00:00:00.000Z","dateType":"vacation","isNew":true,"isProven":true},
     {"_id":1519,"date":"2021-01-03T00:00:00.000Z","dateType":"vacation","isNew":true,"isProven":true},
     {"_id":1520,"date":"2021-01-04T00:00:00.000Z","dateType":"vacation","isNew":true,"isProven":true},
@@ -1791,8 +1782,7 @@ const workerRecords = [
   "_id":10,
   "name":"Elen Green",
   "dateRecords":[
-    {"_id":1725,
-    "date":"2021-01-01T00:00:00.000Z","dateType":"illness","isNew":true,"isProven":true},
+    {"_id":1725,"date":"2021-01-01T00:00:00.000Z","dateType":"illness","isNew":true,"isProven":true},
     {"_id":1726,"date":"2021-01-02T00:00:00.000Z","dateType":"illness","isNew":true,"isProven":true},
     {"_id":1727,"date":"2021-01-03T00:00:00.000Z","dateType":"illness","isNew":true,"isProven":true},
     {"_id":1728,"date":"2021-01-04T00:00:00.000Z","dateType":"illness","isNew":true,"isProven":true},
@@ -2001,8 +1991,7 @@ const workerRecords = [
     "_id":11,
     "name":"Michel Green",
     "dateRecords":[
-      {"_id":1927,
-      "date":"2021-01-01T00:00:00.000Z","dateType":"illness","isNew":true,"isProven":true},
+      {"_id":1927,"date":"2021-01-01T00:00:00.000Z","dateType":"illness","isNew":true,"isProven":true},
       {"_id":1928,"date":"2021-01-02T00:00:00.000Z","dateType":"illness","isNew":true,"isProven":true},
       {"_id":1929,"date":"2021-01-03T00:00:00.000Z","dateType":"illness","isNew":true,"isProven":true},
       {"_id":1930,"date":"2021-01-04T00:00:00.000Z","dateType":"illness","isNew":true,"isProven":true},
@@ -2194,8 +2183,7 @@ const workerRecords = [
     "_id":12,
     "name":"Ann Green",
     "dateRecords":[
-      {"_id":2112,
-      "date":"2021-01-01T00:00:00.000Z","dateType":"vacation","isNew":true,"isProven":true},
+      {"_id":2112,"date":"2021-01-01T00:00:00.000Z","dateType":"vacation","isNew":true,"isProven":true},
       {"_id":2113,"date":"2021-01-02T00:00:00.000Z","dateType":"vacation","isNew":true,"isProven":true},
       {"_id":2114,"date":"2021-01-03T00:00:00.000Z","dateType":"vacation","isNew":true,"isProven":true},
       {"_id":2115,"date":"2021-01-04T00:00:00.000Z","dateType":"vacation","isNew":true,"isProven":true},
@@ -2404,8 +2392,7 @@ const workerRecords = [
     "_id":13,
     "name":"George Smith",
     "dateRecords":[
-      {"_id":2314,
-      "date":"2021-01-01T00:00:00.000Z","dateType":"vacation","isNew":true,"isProven":true},
+      {"_id":2314,"date":"2021-01-01T00:00:00.000Z","dateType":"vacation","isNew":true,"isProven":true},
       {"_id":2315,"date":"2021-01-02T00:00:00.000Z","dateType":"vacation","isNew":true,"isProven":true},
       {"_id":2316,"date":"2021-01-03T00:00:00.000Z","dateType":"vacation","isNew":true,"isProven":true},
       {"_id":2317,"date":"2021-01-13T00:00:00.000Z","dateType":"illness","isNew":true,"isProven":true},
@@ -2600,8 +2587,7 @@ const workerRecords = [
     "_id":14,
     "name":"Elen Smith",
     "dateRecords":[
-      {"_id":2502,
-      "date":"2021-01-01T00:00:00.000Z","dateType":"vacation","isNew":true,"isProven":true},
+      {"_id":2502,"date":"2021-01-01T00:00:00.000Z","dateType":"vacation","isNew":true,"isProven":true},
       {"_id":2503,"date":"2021-01-02T00:00:00.000Z","dateType":"vacation","isNew":true,"isProven":true},
       {"_id":2504,"date":"2021-01-03T00:00:00.000Z","dateType":"vacation","isNew":true,"isProven":true},
       {"_id":2505,"date":"2021-01-04T00:00:00.000Z","dateType":"vacation","isNew":true,"isProven":true},
@@ -2805,8 +2791,7 @@ const workerRecords = [
     "_id":15,
     "name":"Michel Smith",
     "dateRecords":[
-      {"_id":2699,
-      "date":"2021-01-01T00:00:00.000Z","dateType":"vacation","isNew":true,"isProven":true},
+      {"_id":2699,"date":"2021-01-01T00:00:00.000Z","dateType":"vacation","isNew":true,"isProven":true},
       {"_id":2700,"date":"2021-01-02T00:00:00.000Z","dateType":"vacation","isNew":true,"isProven":true},
       {"_id":2701,"date":"2021-01-03T00:00:00.000Z","dateType":"vacation","isNew":true,"isProven":true},
       {"_id":2702,"date":"2021-01-04T00:00:00.000Z","dateType":"vacation","isNew":true,"isProven":true},
@@ -3000,8 +2985,7 @@ const workerRecords = [
     "_id":16,
     "name":"Ann Smith",
     "dateRecords":[
-      {"_id":2886,
-      "date":"2021-01-01T00:00:00.000Z","dateType":"illness","isNew":true,"isProven":true},
+      {"_id":2886,"date":"2021-01-01T00:00:00.000Z","dateType":"illness","isNew":true,"isProven":true},
       {"_id":2887,"date":"2021-01-02T00:00:00.000Z","dateType":"illness","isNew":true,"isProven":true},
       {"_id":2888,"date":"2021-01-03T00:00:00.000Z","dateType":"illness","isNew":true,"isProven":true},
       {"_id":2889,"date":"2021-01-04T00:00:00.000Z","dateType":"illness","isNew":true,"isProven":true},
@@ -3177,8 +3161,12 @@ const workerRecords = [
   }
 ]
 
-const worekeworkerRecordsJSON = JSON.stringify(workerRecords)
-export { 
+const workerRecordsJSON = JSON.stringify(workerRecords)
+
+
+// module.exports = 
+export
+{ 
   workerRecords, 
-  worekeworkerRecordsJSON,
+  workerRecordsJSON,
 }
