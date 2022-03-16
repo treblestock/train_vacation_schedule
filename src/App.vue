@@ -15,7 +15,6 @@
 // Components
 import AppHeader from '@/components/app-header.vue'
 import AppTable from '@/components/app-table.vue'
-import LikesComp from '@/components/LikesComp.vue'
 
 // Directives
 import relativePosition from '@/components/directives/relativePosition.js'
@@ -36,7 +35,6 @@ export default {
     AppHeader,
     AppTable,
 
-    LikesComp,
   },
   directives: {
     pos: relativePosition,
