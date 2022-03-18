@@ -2,56 +2,25 @@
   <form class="table-sort-and-filter">
     <app-select
       selectName="month"
-      :options='months'
-      @change='onSelectedMonth'
+      :options="this.$store.getters.MONTHS"
+      @change="this.$store.dispatch('updateSearchMonth', $event)"
       ></app-select>
     <app-select
       selectName="dateType"
-      :options='dateTypes'
-      @change='onSelectedPeriodType'
+      :options="this.$store.getters.PERIOD_TYPES"
+      @change="this.$store.dispatch('updateSearchDateType', $event)"
       ></app-select>
     <multiple-select
       selectName="month"
-      :options='months'
+      :options="this.$store.getters.MONTHS"
       :columns='3'
     ></multiple-select>
   </form> 
 </template> 
  
 <script>
-
-
 export default { 
-  components: {
-    
-  },
-  props: {
 
-  },
-  data() {
-    return {
-      dateTypes: {},
-      months: {},
-    }
-  },
-  methods: {
-    onSelectedMonth() {
-      const selectedMonth = event.target.selectedOptions[0].value
-      this.$emit('onMonthQuery', selectedMonth)
-    },
-    onSelectedPeriodType() {
-      const selectedPeriodType = event.target.selectedOptions[0].value
-      this.$emit('onTypeQuery', selectedPeriodType)
-    },
-  },
-  mounted() {
-    import('@/database/index.js')
-      .then(modules => {
-        this.dateTypes = modules.PERIOD_TYPES
-        this.months = modules.MONTHS
-      })
-      .catch(e => console.log(e) )
-  }
 } 
 </script> 
    

@@ -1,17 +1,14 @@
 <template>
-  <app-header
-    @on-queries-changed='onQueriesChanged'
-  ></app-header>
+  <app-header></app-header>
   <app-table
-    :records='formatedWorkersRecords'
-    :searchQueries='searchQueries'
-    @on-ceil-clicked='onCeilCliked'
+    :records='workerRecords'
   ></app-table>
   
 
 </template>
 
 <script>
+import { mapState, mapGetters, mapActions, mapMutations} from 'vuex'
 // Components
 import AppHeader from '@/components/app-header.vue'
 import AppTable from '@/components/app-table.vue'
@@ -21,14 +18,8 @@ import relativePosition from '@/components/directives/relativePosition.js'
 import translate from '@/components/directives/translate.js'
 
 // Database 
-import { 
-  // workerRecords,
-  workerRecordsJSON ,
- } from '@/database/index.js'
+import { workerRecordsJSON } from '@/database/index.js'
 
-// Helpers
-import {getReps} from '@/helpers/mockData.js'
-import {toDateArray} from '@/helpers/date.js'
 
 export default {
   components: {
@@ -42,7 +33,6 @@ export default {
   },
   data() {
     return {
-      workerRecords: [],
       searchQueries: {
         month: 'january',
         dateType: 'vacation',
@@ -50,75 +40,16 @@ export default {
     }
   },
   computed: {
-    formatedWorkersRecords() {
-      // for (const workerRecord of this.workerRecords) {
-      //   workerRecord.dates = workerRecord.dateRecords.map(period => toDateArray(period, workerRecord._id) ).flat()
-      //   delete workerRecord.dateRecords
-
-      // }
-      return this.workerRecords
-    },
-  },
-  watch: {
-    formatedWorkersRecords: {
-      deep: true,
-      handler() {
-        console.log('formatedWorkersRecords changed...')
-      }
-    }
+    ...mapGetters(['workerRecords']),
   },
   methods: {
-    onCeilCliked({workerId, dateStamp}) {
-      const dateRecord = this.findDateRecord(workerId,dateStamp)
-      if (!dateRecord) {
-        workerRecords.addDateRecord()
-        return 
-      }
-      console.log(
-        dateRecord.date.getMonth(), 
-        dateRecord.date.getDate(),
-        dateRecord.dateType,
-        this.formatedWorkersRecords.find(rec => rec._id == workerId).name
-      )
-      
-    },
-    modifyDate({workerId, dateStamp}) {
-      const workerRecrord = this.workerRecords.find(workerRecrord => workerRecrord._id == workerId)
-    },
-    onQueriesChanged(newQueries) {
-      this.searchQueries = newQueries
-    },
-    findDateRecord(workerId, dateStamp) {
-      const workerRecord = this.formatedWorkersRecords.find(workerRecord => workerRecord._id == workerId)
-      return workerRecord.dateRecords.find(dateRecord => dateRecord.date.getTime() == dateStamp)
-    },
-
-    globalRecordsCheck(workerRecords) {
-      const repsOfWorkerId = getReps(workerRecords, '_id')
-      if(repsOfWorkerId.length) {
-        console.log(repsOfWorkerId)
-        throw new Error('non non-unic worker IDs')
-      }
-
-      for (const wRec of workerRecords) {
-        const repsOfDate = getReps(wRec.dateRecords, 'date')
-        if(repsOfDate.length) {
-          console.log(repsOfDate)
-          throw new Error('non non-unic worker IDs')
-        }
-
-        for (const dRec of wRec.dateRecords) {
-          dRec.date = new Date(dRec.date)
-          dRec.date.setHours(0)
-        }
-      }
-    },
   },
   beforeMount() {
     const parsedWorkerRecords = JSON.parse(workerRecordsJSON  )
-    this.globalRecordsCheck(parsedWorkerRecords)
-    this.workerRecords = parsedWorkerRecords
-  }
+    this.$store.dispatch('validateWorkerRecords', parsedWorkerRecords)
+    this.$store.commit('replaceWorkerRecords', parsedWorkerRecords)
+
+  },
 }
 </script>
 

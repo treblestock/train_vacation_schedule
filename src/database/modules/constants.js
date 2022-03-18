@@ -14,8 +14,10 @@ const MONTHS = {
 }
 
 const PERIOD_TYPES = {
+  all: 'Все',
   illness: 'Больничный',
   vacation: 'Отпуск',
+  marked: 'отмеченные',
 }
 
 export { 

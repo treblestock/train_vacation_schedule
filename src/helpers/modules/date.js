@@ -50,8 +50,11 @@ const monthNumber = {
 }
 
 
+function getMonthDates(month, dates = [], day = 1) {
+  return _getMonthDates(monthNumber[month])
+}
 
-function getMonthDates(monthNumber, dates = [], day = 1) {
+function _getMonthDates(monthNumber, dates = [], day = 1) {
   const newDate = new Date(2021, monthNumber, day++)
 
   if (newDate.getMonth() !== monthNumber) {
@@ -59,7 +62,7 @@ function getMonthDates(monthNumber, dates = [], day = 1) {
   }
 
   dates.push(newDate)
-  return getMonthDates(monthNumber, dates, day)
+  return _getMonthDates(monthNumber, dates, day)
 }
 
 

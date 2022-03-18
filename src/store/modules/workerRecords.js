@@ -1,3 +1,6 @@
+import { getReps } from "../../helpers"
+import { monthNumber } from "../../helpers"
+
 export default {
   modules: {
     
@@ -5,13 +8,28 @@ export default {
   
   
   state: () => ({
-    
+    workerRecords: [],
   }),
   getters: {
-    
+    // state copy
+    workerRecords: (state, getters) => state.workerRecords,
+
+
+    // 
+    findWorkerRecordGlobal:(state, getters) => workerId => getters.workerRecords.find(wr => wr._id == workerId),
+    findDateRecordGlobal: (state, getters) => ({workerId, date }) => {
+      const wr = getters.workerRecords.find(wr => wr._id == workerId)
+      return wr.dateRecords.find( dr => dr.date.getTime() == date )
+    },
+
+    findFilteredDateRecordLocal: (state, getters) => ({dateRecords, date }) => {
+      return dateRecords.find( dr => dr.date.getTime() == date )
+    },
+
+
   },
   mutations: {
-    
+    replaceWorkerRecords: (state, newWorkerRecords) => state.workerRecords = newWorkerRecords,
   },
   actions: {
     // STORE PARTS INTERACTION:
@@ -30,20 +48,56 @@ export default {
     // 
 
     // arrays api 
-    addWorkerRecord(ctx, {workerRecord}) {},
-    removeWorkerRecord(ctx, {workerId}) {},
-    findWorkerRecord(ctx, {workerId}) {},
+    addWorkerRecord: ({getters, dispatch}, {workerRecord}) => {},
+    removeWorkerRecord: ({getters, dispatch}, {workerId}) => {},
 
-    addDateRecord(ctx, {workerId, dateRecord}) {},
-    removeDateRecord(ctx, {workerId, DateId}) {},
-    findDateRecord(ctx, {workerId, DateId}) {},
+    addDateRecord: ({getters, dispatch}, {workerId, dateRecord}) => {},
+    removeDateRecord: ({getters, dispatch}, {workerId, dateId}) => {},
 
     // instances api (records)
-    createWorkerRecord(ctx, {workerOptions}) {},
-    createDateRecord(ctx, {deteOptions}) {},
+    createWorkerRecord: ({getters, dispatch}, {workerOptions}) => {},
+    createDateRecord: ({getters, dispatch}, {deteOptions}) => {},
     
-    updateWorkerRecord(ctx, {prop, newVaue}) {},
-    updateDateRecord(ctx, {prop, newVaue}) {}, // update dateType
+    updateWorkerRecord: ({getters, dispatch}, {prop, newVaue}) => {},
+    updateDateRecord: ({getters, dispatch}, {prop, newVaue}) => {}, // update dateType
+
+    // API
+    validateWorkerRecords: ({state, dispatch}, workerRecords) => {
+      const repsOfWorkerId = dispatch('getReps', {
+        arr: workerRecords,
+        prop: '_id'
+      })
+      if(repsOfWorkerId.length) {
+        console.log(repsOfWorkerId)
+        throw new Error('non non-unic worker IDs')
+      }
+
+      for (const wRec of workerRecords) {
+        const repsOfDate = dispatch('getReps', {
+          arr: wRec.dateRecords, 
+          prop: 'date'
+        })
+        if(repsOfDate.length) {
+          console.log(repsOfDate)
+          throw new Error('non non-unic worker IDs')
+        }
+
+        for (const dRec of wRec.dateRecords) {
+          dRec.date = new Date(dRec.date)
+          dRec.date.setHours(0)
+        }
+      }
+    },
+
     
+    // helpers
+    datestampToStringFormat: (ctx, datestamp) => {
+      const date = new Date(datestamp)
+      return '' + date.getDate() + (date.getMonth() + 1)
+    },
+    workerIdToName: ({}, workerId) => {
+
+    },
+    getReps: (ctx, {arr, prop}) => getReps(arr, prop),
   },
 }

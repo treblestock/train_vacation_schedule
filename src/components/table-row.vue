@@ -3,10 +3,14 @@
     <div class="row__header" :id='workerId'>{{rowHeader}}</div>
     <div class="row__body">
       <table-ceil
-        v-for="date in datesInMonth" :key="date"
-        :dateType="findDateRecordByDate(date)?.dateType"
+        v-for="date in this.$store.getters.datesInCurrentMonth" :key="date"
+        :date-type="findFilteredDateRecordLocal({
+          dateRecords: dateRecords, 
+          date: date.getTime(),
+        })?.dateType"
         
-        :id='`${workerId} ${date.getTime()}`'
+        :data-worker-id="workerId"
+        :data-date="date.getTime()"
       >{{date.getDate()}}</table-ceil>
     </div>
    </div>
@@ -16,48 +20,24 @@
 import TableCeil from '@/components/table-ceil.vue'
 
 // Helpers
-import {monthNumber} from '@/helpers/date.js'
+import { mapState, mapGetters, mapActions, mapMutations} from 'vuex'
 
 export default {
   components: {
     TableCeil,
   },
   props: {
-    datesInMonth: {
-      type: Array,
-    },
-    rowHeader: {
-      type: String,
-    },
-    workerId: {
-      type: Number,
-    },
-    dateRecords: {
-      type: Array,
-    },
-    searchQueries: {
-      type: Object,
-    },
-  },
-  data() {
-    return {
-    }
-  },
-  methods: {
-    findDateRecordByDate(dateInMonth) {
-      return this.datesFilteredMonth.find(dateRecord => dateRecord.date.getTime() == dateInMonth.getTime() )
-    }
+    rowHeader: String,
+    workerId: Number,
+    dateRecords: Array,
   },
   computed: {
-    datesFilteredMonth() {
-      if(!this.searchQueries.month) this.dateRecords
-      const requiredMonth = this.searchQueries.month
-      const requiredMonthNumber = monthNumber[requiredMonth]
-      return this.dateRecords.filter(dateRecord => dateRecord.date.getMonth() == requiredMonthNumber)
-    },
+    ...mapGetters([
+      'searchMonth',
+      'findDateRecordGlobal',
+      'findFilteredDateRecordLocal',
+    ]),
   },
-  mounted() {
-  }
 } 
 </script> 
    

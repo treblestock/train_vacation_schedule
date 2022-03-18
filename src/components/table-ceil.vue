@@ -1,5 +1,5 @@
 <template> 
-   <div class="ceil" 
+   <div class="ceil"
     :style='{backgroundColor: currentColor}'>
     <slot></slot>
    </div>
@@ -8,15 +8,13 @@
 <script> 
 export default { 
   props: {
-    dateType: {
-      type: String,
-    },
+    dateType: String,
   },
   computed: {
     currentColor() {
-      return this.dateType === 'vacation' ? 'green' :
-        this.dateType === 'illness' ? 'skyblue' :
-        this.dateType === 'marked' ? '#eee' : 'none'
+      return  this.dateType === 'vacation' ? 'green' :
+              this.dateType === 'illness' ? 'skyblue' :
+              this.dateType === 'marked' ? '#eee' : 'none'
     }
   }
 } 

@@ -1,3 +1,5 @@
+import { arrAdd, arrDiff, arrMult } from "../../helpers"
+
 export default {
   modules: {
     
@@ -5,16 +7,52 @@ export default {
   
   
   state: () => ({
-    
+    isStartMouseEnter: false,
+    marked: [],
+    markedDates: [],
+    markedWorkerIds: [],
+
+    unmarkedWorkerIds: [],
+    unmarkedDates: [],
   }),
   getters: {
-    
+    // chosen: (state, getters) => arrDiff(getters.chosen, getters.unmarked ),
+    // marked: (state, getters) => arrMult(markedWorkerIds, markedDates),
+    // unmarked: (state, getters) => arrMult(unmarkedWorkerIds, unmarkedDates),
+
   },
   mutations: {
     
   },
   actions: {
     // API
+
+    // 
+    startMarking: ({state}) => state.isStartMouseEnter = true,
+    stopMarking: ({state}) => state.isStartMouseEnter = false,
+    mark({state}, evnt) {
+      const date = evnt.target.dataset.date
+      const workerId = evnt.target.dataset.workerId
+
+      if (!date || !workerId || !state.isStartMouseEnter) return 
+
+      if (!state.markedDates.includes(date) ) state.markedDates.push(date)
+      if (!state.markedWorkerIds.includes(workerId) ) state.markedWorkerIds.push(workerId)
+      
+      console.log(state.markedDates, state.markedWorkerIds)
+    },
+
+    showDateRecord: ({getters}, evnt) => {
+      const date = evnt.target.dataset.date
+      const workerId = evnt.target.dataset.workerId
+      const dr = getters.findWorkerRecordGlobal({ workerId, date })
+      console.log(dr)
+    },
+    
+    // array Helpers
+    arrMult: (ctx, {arrA, arrB} ) => arrA.map(a => arrB.map(b => [a, b] ) ).flat(),
+    arrDiff: (ctx, {arrA, arrB} ) => arrA.filter(a => !arrB.includes(a) ),
+    arrAdd: (ctx, {arrA, arrB} ) => arrA.concat( arrDiff(arrB, arrA) ),
   },
 }
 // The aim is to provide ability to mark not only one record at a time or a line of a worker's records at a time, but to provide ability to mark some rectangle of workerRecords no matter they exist or not (exist -> find, not -> create empty)
