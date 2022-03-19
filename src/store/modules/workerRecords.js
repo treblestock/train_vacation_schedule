@@ -8,28 +8,35 @@ export default {
   
   
   state: () => ({
-    workerRecords: [],
+    _workerRecords: [],
   }),
   getters: {
-    // state copy
-    workerRecords: (state, getters) => state.workerRecords,
+    // state getters
+    _workerRecords: (state, getters, rootState, rootGetters) => state._workerRecords,
 
+    // workerRecords
+    findWorkerRecord: () => ({workerRecords, workerId}) => workerRecords.find(wr => wr._id == workerId ),
+    findWorkerRecordGlobal: (state, getters, rootState, rootGetters) => workerId => (
+      rootGetters._workerRecords.find(wr => wr._id == workerId)
+    ),
 
-    // 
-    findWorkerRecordGlobal:(state, getters) => workerId => getters.workerRecords.find(wr => wr._id == workerId),
-    findDateRecordGlobal: (state, getters) => ({workerId, date }) => {
-      const wr = getters.workerRecords.find(wr => wr._id == workerId)
+    // dateRecords
+    findDateRecord: () => ({dateRecords, date}) => dateRecords.find(dr => dr.date.getTime() == date ),
+    findDateRecordGlobal: (state, getters, rootState, rootGetters) => ({workerId, date }) => {
+      const wr = rootGetters._workerRecords.find(wr => wr._id == workerId)
       return wr.dateRecords.find( dr => dr.date.getTime() == date )
     },
 
-    findFilteredDateRecordLocal: (state, getters) => ({dateRecords, date }) => {
-      return dateRecords.find( dr => dr.date.getTime() == date )
-    },
-
-
   },
   mutations: {
-    replaceWorkerRecords: (state, newWorkerRecords) => state.workerRecords = newWorkerRecords,
+    setWorkerRecords: (state, newWorkerRecords) => state._workerRecords = newWorkerRecords,
+    
+    // arrays api 
+    addWorkerRecord: ({getters, dispatch}, {workerRecord}) => {},
+    removeWorkerRecord: ({getters, dispatch}, {workerId}) => {},
+    
+    addDateRecord: ({getters, dispatch}, {workerId, dateRecord}) => {},
+    removeDateRecord: ({getters, dispatch}, {workerId, dateId}) => {},
   },
   actions: {
     // STORE PARTS INTERACTION:
@@ -50,7 +57,7 @@ export default {
     // arrays api 
     addWorkerRecord: ({getters, dispatch}, {workerRecord}) => {},
     removeWorkerRecord: ({getters, dispatch}, {workerId}) => {},
-
+    
     addDateRecord: ({getters, dispatch}, {workerId, dateRecord}) => {},
     removeDateRecord: ({getters, dispatch}, {workerId, dateId}) => {},
 
@@ -58,8 +65,8 @@ export default {
     createWorkerRecord: ({getters, dispatch}, {workerOptions}) => {},
     createDateRecord: ({getters, dispatch}, {deteOptions}) => {},
     
-    updateWorkerRecord: ({getters, dispatch}, {prop, newVaue}) => {},
-    updateDateRecord: ({getters, dispatch}, {prop, newVaue}) => {}, // update dateType
+    updateWorkerRecord: ({getters, dispatch}, {prop, newVaue}) => {}, 
+    updateDateRecord: ({getters, dispatch}, {prop, newVaue}) => {}, // update dateType, use setter (mutation)
 
     // API
     validateWorkerRecords: ({state, dispatch}, workerRecords) => {
@@ -94,9 +101,6 @@ export default {
     datestampToStringFormat: (ctx, datestamp) => {
       const date = new Date(datestamp)
       return '' + date.getDate() + (date.getMonth() + 1)
-    },
-    workerIdToName: ({}, workerId) => {
-
     },
     getReps: (ctx, {arr, prop}) => getReps(arr, prop),
   },

@@ -3,9 +3,9 @@
     <div class="row__header" :id='workerId'>{{rowHeader}}</div>
     <div class="row__body">
       <table-ceil
-        v-for="date in this.$store.getters.datesInCurrentMonth" :key="date"
-        :date-type="findFilteredDateRecordLocal({
-          dateRecords: dateRecords, 
+        v-for="date in $store.getters.datesInCurrentMonth" :key="date"
+        :date-type="findDateRecord({
+          dateRecords, 
           date: date.getTime(),
         })?.dateType"
         
@@ -33,9 +33,7 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'searchMonth',
-      'findDateRecordGlobal',
-      'findFilteredDateRecordLocal',
+      'findDateRecord',
     ]),
   },
 } 

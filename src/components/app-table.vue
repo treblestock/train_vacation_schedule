@@ -7,7 +7,7 @@
 
         :workerId='workerRecord._id'
         :rowHeader='workerRecord.name'
-        :dateRecords='this.filteredDateRecords(workerRecord.dateRecords)'
+        :dateRecords='dateRecords(workerRecord.dateRecords)'
 
         @mousedown='startMarking($event), showDateRecord($event)'
         @mouseup='stopMarking($event)'
@@ -32,13 +32,10 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'workerRecords',
-      'findWorkerRecordGlobal',
-      'filteredDateRecords',
-      'findFilteredDateRecordLocal',
+      'dateRecords',
+      'findDateRecord',
     ]),
   },
-
   methods: {
     ...mapActions([
       'startMarking',
@@ -46,8 +43,6 @@ export default {
       'mark',
       'showDateRecord',
     ]),
-  },
-  mounted() {
   },
 } 
 </script> 

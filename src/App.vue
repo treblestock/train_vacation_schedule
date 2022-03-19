@@ -1,7 +1,7 @@
 <template>
   <app-header></app-header>
   <app-table
-    :records='workerRecords'
+    :records='workerRecords(_workerRecords)'
   ></app-table>
   
 
@@ -31,24 +31,16 @@ export default {
     pos: relativePosition,
     translate,
   },
-  data() {
-    return {
-      searchQueries: {
-        month: 'january',
-        dateType: 'vacation',
-      },
-    }
-  },
   computed: {
-    ...mapGetters(['workerRecords']),
-  },
-  methods: {
+    ...mapGetters([
+      '_workerRecords',
+      'workerRecords',
+    ]),
   },
   beforeMount() {
     const parsedWorkerRecords = JSON.parse(workerRecordsJSON  )
     this.$store.dispatch('validateWorkerRecords', parsedWorkerRecords)
-    this.$store.commit('replaceWorkerRecords', parsedWorkerRecords)
-
+    this.$store.commit('setWorkerRecords', parsedWorkerRecords)
   },
 }
 </script>

@@ -8,49 +8,61 @@ export default {
   
   
   state: () => ({
-    searchMonth: 'january',
-    searchDateType: 'all',
     PERIOD_TYPES: PERIOD_TYPES,
     MONTHS: MONTHS,
+
+    searchMonth: 'january',
+    searchDateType: 'all',
   }), 
   getters: {
-    searchMonth: (state) => state.searchMonth,
-    searchDateType: (state) => state.searchDateType,
+    // state dublicates
     PERIOD_TYPES: (state) => state.PERIOD_TYPES,
     MONTHS: (state) => state.MONTHS,
+
+    searchMonth: (state) => state.searchMonth,
+    searchDateType: (state) => state.searchDateType,
     
+    // 
     datesInCurrentMonth: (state) => getMonthDates(state.searchMonth),
 
-    dateRecordsFilteredByDateType: (state, getters) => ({dateRecords, dateType}) => (
-      dateRecords.filter(dr => dr.dateType == dateType)
+    // * workerRecords
+    // workerRecords modifications (filters, sorts, formatting)
+    
+    // public workerRecords  (prepeared for represantation)
+    workerRecords: (_, getters) => (workerRecords) => {
+      let p = workerRecords
+      return p
+    },
+    
+    
+    
+    // * dateRecords
+    // dateRecords modifications (filters, sorts, formatting)
+    filterDateRecordsByDateType: (_, getters) => (dateRecords) => (
+      dateRecords.filter(dr => dr.dateType == getters.searchDateType)
     ),
-    dateRecordsFilteredByMonth: (state, getters) => ({dateRecords, month}) => (
-      dateRecords.filter(dr => dr.date.getMonth() == monthNumber[month] ) 
+    filterDateRecordsByMonth: (_, getters) => (dateRecords) => (
+      dateRecords.filter(dr => dr.date.getMonth() == monthNumber[getters.searchMonth] ) 
     ),
-    filteredDateRecords: (state, getters) => dateRecords => {
-      const filteredByMonth = getters.searchMonth  ? getters.dateRecordsFilteredByMonth({ 
-        dateRecords: dateRecords,
-        month: getters.searchMonth,
-      }) : (console.log('here'), dateRecords )
 
-      const filteredByDateType = getters.searchDateType != 'all' ? getters.dateRecordsFilteredByDateType({ 
-        dateRecords: filteredByMonth,
-        dateType: getters.searchDateType,
-      }) : filteredByMonth
-      
-      return filteredByDateType
+    // public dateRecords  (prepeared for represantation)
+    dateRecords: (state, getters,) => dateRecords => {
+      let p = dateRecords
+      p = getters.searchMonth             ? getters.filterDateRecordsByMonth(p) : p
+      p = getters.searchDateType != 'all' ? getters.filterDateRecordsByDateType(p) : p
+      return p
     },
   },
   mutations: {
-    updateSearchMonth: (state, newMonth) => state.searchMonth = newMonth,
-    updateSearchDateType: (state, newDateType) => state.searchDateType = newDateType,
+    setSearchMonth: (state, newMonth) => state.searchMonth = newMonth,
+    setSearchDateType: (state, newDateType) => state.searchDateType = newDateType,
   },
   actions: {
     updateSearchMonth: ({commit}, evnt) => {
-      commit('updateSearchMonth', evnt.target.selectedOptions[0].value)
+      commit('setSearchMonth', evnt.target.selectedOptions[0].value)
     },
     updateSearchDateType: ({commit}, evnt) => {
-      commit('updateSearchDateType', evnt.target.selectedOptions[0].value)
+      commit('setSearchDateType', evnt.target.selectedOptions[0].value)
     },
   },
 }

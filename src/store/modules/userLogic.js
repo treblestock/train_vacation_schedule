@@ -12,8 +12,11 @@ export default {
     markedDates: [],
     markedWorkerIds: [],
 
+    unmarked:[],
     unmarkedWorkerIds: [],
     unmarkedDates: [],
+
+    chozen: [],
   }),
   getters: {
     // chosen: (state, getters) => arrDiff(getters.chosen, getters.unmarked ),
@@ -42,10 +45,10 @@ export default {
       console.log(state.markedDates, state.markedWorkerIds)
     },
 
-    showDateRecord: ({getters}, evnt) => {
+    showDateRecord: ({rootGetters}, evnt) => {
       const date = evnt.target.dataset.date
       const workerId = evnt.target.dataset.workerId
-      const dr = getters.findWorkerRecordGlobal({ workerId, date })
+      const dr = rootGetters.findWorkerRecordGlobal({ workerId, date })
       console.log(dr)
     },
     
