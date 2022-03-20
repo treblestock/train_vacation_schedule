@@ -2,24 +2,24 @@
    <div class="table-header__row">
     <div class="row__header" id="tableHeaderRow">{{rowHeader}}</div>
     <div class="row__body">
-      <table-ceil
+      <table-cell
         v-for="date in $store.getters.datesInCurrentMonth" :key="date"
         
         :data-date="date.getTime()"
-      >{{date.getDate()}}</table-ceil>
+      >{{date.getDate()}}</table-cell>
     </div>
    </div>
 </template>
  
 <script>
-import TableCeil from '@/components/TableCeil.vue'
+import TableCell from '@/components/TableCell.vue'
 
 // Helpers
 import { mapState, mapGetters, mapActions, mapMutations} from 'vuex'
 
 export default {
   components: {
-    TableCeil,
+    TableCell,
   },
   props: {
     rowHeader: String,

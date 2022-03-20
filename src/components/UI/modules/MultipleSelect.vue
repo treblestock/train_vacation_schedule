@@ -29,7 +29,7 @@
 </template> 
  
 <script>
-import WithPopup from '@/components/UI/modules/with-popup.vue'
+import WithPopup from '@/components/UI/modules/WithPopup.vue'
 
 // directives
 import relativePosition from '@/components/directives/relativePosition.js'

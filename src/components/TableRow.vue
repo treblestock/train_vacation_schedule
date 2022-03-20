@@ -4,7 +4,7 @@
       :data-worker-id="workerId"
     >{{rowHeader}}</div>
     <div class="row__body">
-      <table-ceil
+      <table-cell
         v-for="date in $store.getters.datesInCurrentMonth" :key="date"
         :date-type="findDateRecord({
           dateRecords, 
@@ -14,20 +14,20 @@
         :data-worker-id="workerId"
         :data-date="date.getTime()"
         :id="'' + workerId + date.getTime()"
-      ></table-ceil>
+      ></table-cell>
     </div>
    </div>
 </template>
  
 <script>
-import TableCeil from '@/components/TableCeil.vue'
+import TableCell from '@/components/TableCell.vue'
 
 // Helpers
 import { mapState, mapGetters, mapActions, mapMutations} from 'vuex'
 
 export default {
   components: {
-    TableCeil,
+    TableCell,
   },
   props: {
     rowHeader: String,

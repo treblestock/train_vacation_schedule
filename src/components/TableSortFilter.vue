@@ -4,12 +4,12 @@
       selectName="month"
       :options="this.$store.getters.MONTHS"
       @change="this.$store.dispatch('updateSearchMonth', $event)"
-      ></app-select>
+    ></app-select>
     <app-select
       selectName="dateType"
       :options="this.$store.getters.PERIOD_TYPES"
       @change="this.$store.dispatch('updateSearchDateType', $event)"
-      ></app-select>
+    ></app-select>
     <multiple-select
       selectName="month"
       :options="this.$store.getters.MONTHS"

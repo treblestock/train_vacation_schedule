@@ -1,5 +1,5 @@
 <template> 
-   <div class="ceil"
+   <div class="cell"
     :class='currentClass'
     >
     <slot></slot>
@@ -19,7 +19,7 @@ export default {
    
 <style scoped> 
 
-.ceil {
+.cell {
   width: 60px;
   height: 100%;
   border: 1px solid #000;

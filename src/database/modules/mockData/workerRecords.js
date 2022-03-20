@@ -1,7 +1,7 @@
 const workerRecords = [
   {
     "_id":1,
-    "name":"George Trump",
+    "workerName":"George Trump",
     "dateRecords":[
       {"_id":1,"date":"2021-01-01T00:00:00.000Z","dateType":"vacation","isNew":true,"isProven":true},
       {"_id":2,"date":"2021-01-02T00:00:00.000Z","dateType":"vacation","isNew":true,"isProven":true},
@@ -195,7 +195,7 @@ const workerRecords = [
     },
 {
   "_id":2,
-  "name":"Elen Trump",
+  "workerName":"Elen Trump",
   "dateRecords":[
     {"_id":189,"date":"2021-01-01T00:00:00.000Z","dateType":"vacation","isNew":true,"isProven":true},
     {"_id":190,"date":"2021-01-02T00:00:00.000Z","dateType":"vacation","isNew":true,"isProven":true},
@@ -396,7 +396,7 @@ const workerRecords = [
   },
 {
   "_id":3,
-  "name":"Michel Trump",
+  "workerName":"Michel Trump",
   "dateRecords":[
     {"_id":384,"date":"2021-01-01T00:00:00.000Z","dateType":"vacation","isNew":true,"isProven":true},
     {"_id":385,"date":"2021-01-02T00:00:00.000Z","dateType":"vacation","isNew":true,"isProven":true},
@@ -594,7 +594,7 @@ const workerRecords = [
   },
 {
   "_id":4,
-  "name":"Ann Trump",
+  "workerName":"Ann Trump",
   "dateRecords":[
     {"_id":576,"date":"2021-01-01T00:00:00.000Z","dateType":"illness","isNew":true,"isProven":true},
     {"_id":577,"date":"2021-01-02T00:00:00.000Z","dateType":"illness","isNew":true,"isProven":true},
@@ -790,7 +790,7 @@ const workerRecords = [
   },
 {
   "_id":5,
-  "name":"George Vitkovich",
+  "workerName":"George Vitkovich",
   "dateRecords":[
     {"_id":766,"date":"2021-01-01T00:00:00.000Z","dateType":"vacation","isNew":true,"isProven":true},
     {"_id":767,"date":"2021-01-02T00:00:00.000Z","dateType":"vacation","isNew":true,"isProven":true},
@@ -978,7 +978,7 @@ const workerRecords = [
   },
 {
   "_id":6,
-  "name":"Elen Vitkovich",
+  "workerName":"Elen Vitkovich",
   "dateRecords":[
     {"_id":948,"date":"2021-01-01T00:00:00.000Z","dateType":"illness","isNew":true,"isProven":true},
     {"_id":949,"date":"2021-01-02T00:00:00.000Z","dateType":"illness","isNew":true,"isProven":true},
@@ -1192,7 +1192,7 @@ const workerRecords = [
   },
 {
   "_id":7,
-  "name":"Michel Vitkovich",
+  "workerName":"Michel Vitkovich",
   "dateRecords":[
     {"_id":1156,"date":"2021-01-01T00:00:00.000Z","dateType":"illness","isNew":true,"isProven":true},
     {"_id":1157,"date":"2021-01-02T00:00:00.000Z","dateType":"illness","isNew":true,"isProven":true},
@@ -1369,7 +1369,7 @@ const workerRecords = [
   },
 {
   "_id":8,
-  "name":"Ann Vitkovich",
+  "workerName":"Ann Vitkovich",
   "dateRecords":[
     {"_id":1327,"date":"2021-01-01T00:00:00.000Z","dateType":"illness","isNew":true,"isProven":true},
     {"_id":1328,"date":"2021-01-02T00:00:00.000Z","dateType":"illness","isNew":true,"isProven":true},
@@ -1565,7 +1565,7 @@ const workerRecords = [
   },
 {
   "_id":9,
-  "name":"George Green",
+  "workerName":"George Green",
   "dateRecords":[
     {"_id":1517,"date":"2021-01-01T00:00:00.000Z","dateType":"vacation","isNew":true,"isProven":true},
     {"_id":1518,"date":"2021-01-02T00:00:00.000Z","dateType":"vacation","isNew":true,"isProven":true},
@@ -1780,7 +1780,7 @@ const workerRecords = [
 {
   
   "_id":10,
-  "name":"Elen Green",
+  "workerName":"Elen Green",
   "dateRecords":[
     {"_id":1725,"date":"2021-01-01T00:00:00.000Z","dateType":"illness","isNew":true,"isProven":true},
     {"_id":1726,"date":"2021-01-02T00:00:00.000Z","dateType":"illness","isNew":true,"isProven":true},
@@ -1989,7 +1989,7 @@ const workerRecords = [
 {
   
     "_id":11,
-    "name":"Michel Green",
+    "workerName":"Michel Green",
     "dateRecords":[
       {"_id":1927,"date":"2021-01-01T00:00:00.000Z","dateType":"illness","isNew":true,"isProven":true},
       {"_id":1928,"date":"2021-01-02T00:00:00.000Z","dateType":"illness","isNew":true,"isProven":true},
@@ -2181,7 +2181,7 @@ const workerRecords = [
   {
   
     "_id":12,
-    "name":"Ann Green",
+    "workerName":"Ann Green",
     "dateRecords":[
       {"_id":2112,"date":"2021-01-01T00:00:00.000Z","dateType":"vacation","isNew":true,"isProven":true},
       {"_id":2113,"date":"2021-01-02T00:00:00.000Z","dateType":"vacation","isNew":true,"isProven":true},
@@ -2390,7 +2390,7 @@ const workerRecords = [
   {
   
     "_id":13,
-    "name":"George Smith",
+    "workerName":"George Smith",
     "dateRecords":[
       {"_id":2314,"date":"2021-01-01T00:00:00.000Z","dateType":"vacation","isNew":true,"isProven":true},
       {"_id":2315,"date":"2021-01-02T00:00:00.000Z","dateType":"vacation","isNew":true,"isProven":true},
@@ -2585,7 +2585,7 @@ const workerRecords = [
   {
   
     "_id":14,
-    "name":"Elen Smith",
+    "workerName":"Elen Smith",
     "dateRecords":[
       {"_id":2502,"date":"2021-01-01T00:00:00.000Z","dateType":"vacation","isNew":true,"isProven":true},
       {"_id":2503,"date":"2021-01-02T00:00:00.000Z","dateType":"vacation","isNew":true,"isProven":true},
@@ -2789,7 +2789,7 @@ const workerRecords = [
   {
   
     "_id":15,
-    "name":"Michel Smith",
+    "workerName":"Michel Smith",
     "dateRecords":[
       {"_id":2699,"date":"2021-01-01T00:00:00.000Z","dateType":"vacation","isNew":true,"isProven":true},
       {"_id":2700,"date":"2021-01-02T00:00:00.000Z","dateType":"vacation","isNew":true,"isProven":true},
@@ -2983,7 +2983,7 @@ const workerRecords = [
   {
   
     "_id":16,
-    "name":"Ann Smith",
+    "workerName":"Ann Smith",
     "dateRecords":[
       {"_id":2886,"date":"2021-01-01T00:00:00.000Z","dateType":"illness","isNew":true,"isProven":true},
       {"_id":2887,"date":"2021-01-02T00:00:00.000Z","dateType":"illness","isNew":true,"isProven":true},

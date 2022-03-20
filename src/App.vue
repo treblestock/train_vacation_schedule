@@ -1,10 +1,10 @@
 <template>
+
   <app-header></app-header>
   <app-table
     :records='workerRecords(_workerRecords)'
   ></app-table>
   
-
 </template>
 
 <script>
@@ -89,6 +89,10 @@ h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight: 400;}
 
 body {
   line-height: 1.2;
+}
+
+#app {
+  z-index: 0;
 }
 
 button,
