@@ -1,6 +1,8 @@
 <template> 
    <div class="table__row">
-    <div class="row__header" :id='workerId'>{{rowHeader}}</div>
+    <div class="row__header" 
+      :data-worker-id="workerId"
+    >{{rowHeader}}</div>
     <div class="row__body">
       <table-ceil
         v-for="date in $store.getters.datesInCurrentMonth" :key="date"
@@ -11,13 +13,14 @@
         
         :data-worker-id="workerId"
         :data-date="date.getTime()"
-      >{{date.getDate()}}</table-ceil>
+        :id="'' + workerId + date.getTime()"
+      ></table-ceil>
     </div>
    </div>
-</template> 
+</template>
  
 <script>
-import TableCeil from '@/components/table-ceil.vue'
+import TableCeil from '@/components/TableCeil.vue'
 
 // Helpers
 import { mapState, mapGetters, mapActions, mapMutations} from 'vuex'
@@ -45,7 +48,7 @@ export default {
   height: 25px;
 }
 .row__header {
-  flex: 0 0 150px;
+  flex: 1 0 220px;
   border-bottom: 1px solid #000;
 }
 

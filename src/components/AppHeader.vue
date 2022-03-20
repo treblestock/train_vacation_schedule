@@ -10,7 +10,7 @@
 </template> 
  
 <script> 
-import TableSortFilter from '@/components/table-sort-filter.vue'
+import TableSortFilter from '@/components/TableSortFilter.vue'
 export default { 
   components: {
     TableSortFilter,

@@ -10,8 +10,8 @@
 <script>
 import { mapState, mapGetters, mapActions, mapMutations} from 'vuex'
 // Components
-import AppHeader from '@/components/app-header.vue'
-import AppTable from '@/components/app-table.vue'
+import AppHeader from '@/components/AppHeader.vue'
+import AppTable from '@/components/AppTable.vue'
 
 // Directives
 import relativePosition from '@/components/directives/relativePosition.js'

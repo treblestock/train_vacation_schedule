@@ -1,6 +1,7 @@
 <template> 
    <div class="ceil"
-    :style='{backgroundColor: currentColor}'>
+    :class='currentClass'
+    >
     <slot></slot>
    </div>
 </template> 
@@ -11,11 +12,7 @@ export default {
     dateType: String,
   },
   computed: {
-    currentColor() {
-      return  this.dateType === 'vacation' ? 'green' :
-              this.dateType === 'illness' ? 'skyblue' :
-              this.dateType === 'marked' ? '#eee' : 'none'
-    }
+    currentClass() { return this.dateType },
   }
 } 
 </script> 
@@ -23,11 +20,22 @@ export default {
 <style scoped> 
 
 .ceil {
-  border-radius: 8px;
   width: 60px;
   height: 100%;
   border: 1px solid #000;
 
   padding: 0 5px;
 }
+
+.vacation {
+  background-color: green;
+}
+.illness {
+  background-color: skyblue;
+}
+.marked {
+  background-color: #666;
+}
+
+
 </style>
