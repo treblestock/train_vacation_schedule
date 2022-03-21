@@ -164,12 +164,19 @@ export default {
     //  =====================================================================
 
     //* state-api logic
+    chozenCellsClear({state, getters, commit, dispatch}, ) {
+      state.chozenCells.forEach(cell => cell.classList.remove('marked') )
+      commit('chozenCellsClear')
+    }, 
+
     createAndMergeNewDateRecords({state, getters, commit, dispatch, rootGetters}, evnt) {
       const form = evnt.target
       const dateType = form.elements.dateType.selectedOptions[0].value
+
       const cellsOptions = getters.cellsOptionsFromChozenCells
 
       dispatch('updateDateRecords', {dateType, cellsOptions} )
+      dispatch('chozenCellsClear')
     },
     
   },

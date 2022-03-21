@@ -7,7 +7,7 @@
       <div class="form__body">
         <app-select
           selectName="dateType"
-          :options="this.$store.getters.PERIOD_TYPES"
+          :options="this.$store.getters.NEW_DATE_RECORD_FORM_DATE_TYPES"
         ></app-select>
       </div>
 

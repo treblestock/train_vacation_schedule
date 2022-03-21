@@ -33,10 +33,11 @@ export default {
 
     // records initialization
     createWorkerRecord: () => ({workerName, workerRecords = []}) => ({workerName, workerRecords}),
-    createDateRecord: () => ({dateType, date, isNew = true}) => ({
-      date,
+    createDateRecord: (state) => ({dateType, date}) => ({
+      _id: state.lastDateRecordId,
+      date: new Date(+date),
       dateType,
-      isNew,
+      isNew: true,
       isProven: false,
     }),
 
@@ -55,15 +56,22 @@ export default {
     addWorkerRecord: (state, arg) => {},
     removeWorkerRecord: (state, arg) => {},
     
-    addDateRecord: (state, {dateRecords, dateRecord}) => dateRecords.push(dateRecord),
+    addDateRecord: (state, {dateRecords, dateRecord}) => {
+      console.log(dateRecord)
+      dateRecords.push(dateRecord)
+    },
     removeDateRecord: (state, arg) => {},
 
     updateWorkerRecord: (state, newProp) => {},
-    updateDateRecord: (state, {dateRecord, dateType}) => dateRecord.dateType = dateType,
+    updateDateRecord: (state, {dateRecord, dateType}) => {
+      dateRecord.savedValue = dateRecord.dateType
+      dateRecord.dateType = dateType
+      dateRecord.isUpdated = true
+    },
     
     // records initialization
     incWorkerRecordId: (state) => state.lastWorkerRecordId++,
-    incDateRecord: (state) => state.lastDateRecord++,
+    incDateRecordId: (state) => state.lastDateRecordId++,
     
   },
   actions: {
@@ -88,28 +96,33 @@ export default {
       root: true,
       handler: ({getters, commit, dispatch}, {dateType, cellsOptions}) => {
         cellsOptions.forEach( ({workerId, date}) => {
-          console.log(workerId, date, dateType)
           const dateRecords = getters.findWorkerRecord({workerId}).dateRecords
           const foundDateRecord = getters.findDateRecord({dateRecords, date})
+          
           if (foundDateRecord) {
             commit('updateDateRecord', {dateRecord: foundDateRecord, dateType})
+            console.log('foundDateRecord.isUpdated: ', foundDateRecord.isUpdated)
+            console.log('foundDateRecord.isNew: ', foundDateRecord.isNew)
             return
           }
-  
+          
           dispatch('addDateRecord', {dateRecords, dateType, date})
         })
       },
     },
     addDateRecord: ({getters, commit}, {dateRecords, date, dateType}) => {
+      commit('incDateRecordId')
       const newDateRecord = getters.createDateRecord({date, dateType})
-      commit('addDateRecord', {dateRecords, newDateRecord})
+      console.log('newDateRecord.isUpdated: ', newDateRecord.isUpdated)
+      console.log('newDateRecord.isNew: ', newDateRecord.isNew)
+      commit('addDateRecord', {dateRecords, dateRecord: newDateRecord})
     },
     
-
+    
     // API
     validateWorkerRecords: ({state, dispatch, commit}, workerRecords) => {
       const repsOfWorkerId = getReps(workerRecords, '_id')
-        
+      
       if(repsOfWorkerId.length) {
         console.log(repsOfWorkerId)
         throw new Error('non non-unic worker IDs')

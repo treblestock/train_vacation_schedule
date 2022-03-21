@@ -36,7 +36,7 @@
 </template> 
  
 <script>
-import { mapState, mapGetters, mapActions, mapMutations} from 'vuex'
+import { mapState, mapGetters, mapActions, mapMutations } from 'vuex'
 
 import TableHeaderRow from '@/components/TableHeaderRow.vue'
 import TableRow from '@/components/TableRow.vue'

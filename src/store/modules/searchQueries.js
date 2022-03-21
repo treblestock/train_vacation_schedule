@@ -1,5 +1,11 @@
-import { PERIOD_TYPES, MONTHS } from '@/database/index.js'
+import { 
+  DIVISIONS, 
+  MONTHS,
+  DATE_TYPES,
+  NEW_DATE_RECORD_FORM_DATE_TYPES
+} from '@/database/index.js'
 import { getMonthDates, monthNumber } from '../../helpers'
+console.log(NEW_DATE_RECORD_FORM_DATE_TYPES)
 
 export default {
   modules: {
@@ -8,16 +14,20 @@ export default {
   
   
   state: () => ({
-    PERIOD_TYPES: PERIOD_TYPES,
-    MONTHS: MONTHS,
+    DIVISIONS,
+    MONTHS,
+    DATE_TYPES,
+    NEW_DATE_RECORD_FORM_DATE_TYPES,
 
     searchMonth: 'january',
     searchDateType: 'all',
   }), 
   getters: {
     // state dublicates
-    PERIOD_TYPES: (state) => state.PERIOD_TYPES,
+    DIVISIONS: (state) => state.DIVISIONS,
     MONTHS: (state) => state.MONTHS,
+    DATE_TYPES: (state) => state.DATE_TYPES,
+    NEW_DATE_RECORD_FORM_DATE_TYPES: (state) => state.NEW_DATE_RECORD_FORM_DATE_TYPES,
 
     searchMonth: (state) => state.searchMonth,
     searchDateType: (state) => state.searchDateType,

@@ -1,6 +1,6 @@
 <template> 
-  <div class="with-popup">
-    <slot name='element' :='$attrs'></slot>
+  <div class="with-popup" >
+    <slot name='element' v-bind='$attrs'></slot>
     <slot name='popup'></slot>
   </div> 
 </template> 
@@ -11,11 +11,12 @@ export default {
   props: {
     
   },
-} 
+}
 </script> 
    
 <style scoped> 
 .with-popup {
+  display: block;
   position: relative;
 
 }

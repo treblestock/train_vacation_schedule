@@ -12,12 +12,8 @@
 export default { 
   name: 'app-select',
   props: {
-    selectName: {
-      type: String,
-    },
-    options: {
-      type: Object,
-    }
+    selectName: String,
+    options: Object,
   },
 }
 </script>

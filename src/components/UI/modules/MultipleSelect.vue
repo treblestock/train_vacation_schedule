@@ -1,5 +1,5 @@
 <template>
-  
+  <div class="custom-select">
     <select id='select' :name='selectName'  multiple v-show='false'>
       <option
       v-for="(optionText, optionValue) in options" :key='optionValue'
@@ -8,9 +8,10 @@
       >{{optionText}}</option>
     </select>
 
-    <with-popup v-show='true' :="$attrs">
+    <with-popup v-show='true'>
       <template v-slot:element>
-        <button type="button" @click='isShowOptions = !isShowOptions'>
+        <button type="button" 
+          @click='isShowOptions = !isShowOptions'>
           <span class='arrow'>{{selectName}}</span>
         </button>
       </template>
@@ -25,6 +26,7 @@
         </div>
       </template>
     </with-popup>
+  </div>
   
 </template> 
  

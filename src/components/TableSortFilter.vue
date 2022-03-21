@@ -1,19 +1,28 @@
 <template> 
   <form class="table-sort-and-filter">
-    <app-select
-      selectName="month"
+    <app-select 
+      class="form__select"
       :options="this.$store.getters.MONTHS"
+      selectName="month"
       @change="this.$store.dispatch('updateSearchMonth', $event)"
     ></app-select>
-    <app-select
+    <app-select 
+      class="form__select"
+      :options="this.$store.getters.DATE_TYPES"
       selectName="dateType"
-      :options="this.$store.getters.PERIOD_TYPES"
       @change="this.$store.dispatch('updateSearchDateType', $event)"
     ></app-select>
-    <multiple-select
-      selectName="month"
+    <multiple-select 
+      class="form__select"
       :options="this.$store.getters.MONTHS"
+      selectName="month"
       :columns='3'
+    ></multiple-select>
+    <multiple-select 
+      class="form__select"
+      :options="this.$store.getters.DIVISIONS"
+      selectName="Отделы"
+      :columns='2'
     ></multiple-select>
   </form> 
 </template> 
