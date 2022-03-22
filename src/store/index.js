@@ -1,5 +1,3 @@
-// import * as helpers from '@/helpers/index' 
-
 import { createStore } from 'vuex'
 
 import workerRecords from './modules/workerRecords.js'

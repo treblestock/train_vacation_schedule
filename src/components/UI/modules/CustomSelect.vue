@@ -74,35 +74,29 @@ export default {
   computed: {
     _select() { return this.$refs._select },
     _selectOptions() { return [...this._select.children] },
-    _allOption() {return this._selectOptions.find(opt => opt.value == 'all') },
+    // _allOption() {return this._selectOptions.find(opt => opt.value == 'all') },
     select() { return this.$refs.select },
     selectOptions() { return [...this.$refs.options.children] },
-    allOption() {return this.selectOptions.find(opt => opt.dataset.optionValue == 'all') },
+    // allOption() {return this.selectOptions.find(opt => opt.dataset.optionValue == 'all') },
   },
   methods: {
-    setActive(opt) {
+    setActive() {
       this.selectOptions.forEach(option => option.classList.remove('active') )
       event.target.classList.add('active')
     },
-    toggleActive(opt) {
+    toggleActive() {
       event.target.classList.toggle('active')
     },
-    setSelected(_opt) {
+    setSelected() {
       const selectedValue = event.target.dataset.optionValue
       this._selectOptions.forEach(option => option.select = false)
       const _option = this._select.querySelector(`[value='${selectedValue}']`)
       _option.selected = true
       this.$emit('change', this._select.selectedOptions)
     },
-    toggleSelected(_opt) {
+    toggleSelected() {
       const selectedValue = event.target.dataset.optionValue
       const _option = this._select.querySelector(`[value='${selectedValue}']`)
-      // if (selectedValue == 'all' && !event.target.selected) {
-      //   this.setSelected()
-      //   this.setActive()
-      //   if (event.target.selected) this.closePopup()
-      //   return
-      // }
       _option.selected = !_option.selected
       this.$emit('change', this._select.selectedOptions)
     },
@@ -110,31 +104,7 @@ export default {
       !this.multiple 
         ? (this.setActive(), this.setSelected(), this.closePopup() )
         : (this.toggleActive(), this.toggleSelected() ) 
-
-    // onSelect() {
-    //   multiple ? (toggleActive(), toggleSelected() ) 
-    //     : (setActive(), setSelected(), closePopup() )
     },
-
-
-
-    // toggleActive() {
-    //   if (!event.target.classList.contains('option') ) return
-    //   event.target.classList.toggle('active')
-    // },
-    // setActive() {
-    //   if (!event.target.classList.contains('option') ) return
-    //   [...this.$refs.options.children].forEach(option => option.classList.remove('active') )
-    //   event.target.classList.add('active')
-    // },
-    // selectOption() {
-    //   if (!event.target.classList.contains('option') ) return
-    //   const selectedValue = event.target.dataset.optionValue
-    //   const _option = this.$refs._select.querySelector(`[value='${selectedValue}']`)
-    //   _option.selected = this.multiple ? !_option.selected : true
-    //   this.$emit('change', this.$refs._select.selectedOptions)
-    // },
-
 
 
     closePopup() {
@@ -143,9 +113,6 @@ export default {
   },
   mounted() { 
     this.$refs.options.style.setProperty('--columns', this.columns)
-
-    console.log(this._allOption)
-    console.log(this.allOption)
   }
 } 
 </script> 

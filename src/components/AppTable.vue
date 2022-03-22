@@ -66,6 +66,8 @@ export default {
       'startHighlighting',
       'stopHighlighting',
       'openNewDateRecordsFromPopup',
+      // debug
+      'showDateRecord',
     ]),
   },
 } 

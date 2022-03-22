@@ -52,26 +52,43 @@ export default {
       state.lastDateRecordId = dateRecords[dateRecords.length - 1]._id
     },
     
-    // arrays api 
+    // recordsApi api 
     addWorkerRecord: (state, arg) => {},
     removeWorkerRecord: (state, arg) => {},
     
-    addDateRecord: (state, {dateRecords, dateRecord}) => {
-      console.log(dateRecord)
-      dateRecords.push(dateRecord)
-    },
+    addDateRecord: (state, {dateRecords, dateRecord}) => dateRecords.push(dateRecord),
     removeDateRecord: (state, arg) => {},
 
+    
     updateWorkerRecord: (state, newProp) => {},
     updateDateRecord: (state, {dateRecord, dateType}) => {
       dateRecord.savedValue = dateRecord.dateType
       dateRecord.dateType = dateType
       dateRecord.isUpdated = true
     },
+
+    saveUpdatedDateRecord: (state, dateRecord) => {
+      delete dateRecord.savedValue
+      delete dateRecord.isNew
+      delete dateRecord.isUpdated
+    }, 
+    saveNewDateRecord: (state, dateRecord) => delete dateRecord.isNew, 
     
-    // records initialization
+    revokeDateRecordUpdate: (state, dateRecord) => {
+      dateRecord.dateType = dateRecord.savedValue
+      delete dateRecord.isNew
+      delete dateRecord.isUpdated
+    },
+
+    //? very strange case: passing 'wr' and accessing wr.dateRecrods
+    //? enables mutations rather than passing wr.dateRecords directly
+    deleteNewDateRecords: (state, wr) => wr.dateRecords = wr.dateRecords.filter(dr => !dr.isNew), 
+
+    // record initialization
+
     incWorkerRecordId: (state) => state.lastWorkerRecordId++,
     incDateRecordId: (state) => state.lastDateRecordId++,
+    
     
   },
   actions: {
@@ -91,7 +108,7 @@ export default {
     // 
     
     
-    // arrays api 
+    // app state api
     updateDateRecords: {
       root: true,
       handler: ({getters, commit, dispatch}, {dateType, cellsOptions}) => {
@@ -101,8 +118,6 @@ export default {
           
           if (foundDateRecord) {
             commit('updateDateRecord', {dateRecord: foundDateRecord, dateType})
-            console.log('foundDateRecord.isUpdated: ', foundDateRecord.isUpdated)
-            console.log('foundDateRecord.isNew: ', foundDateRecord.isNew)
             return
           }
           
@@ -113,13 +128,28 @@ export default {
     addDateRecord: ({getters, commit}, {dateRecords, date, dateType}) => {
       commit('incDateRecordId')
       const newDateRecord = getters.createDateRecord({date, dateType})
-      console.log('newDateRecord.isUpdated: ', newDateRecord.isUpdated)
-      console.log('newDateRecord.isNew: ', newDateRecord.isNew)
       commit('addDateRecord', {dateRecords, dateRecord: newDateRecord})
+    },
+
+    saveChanges: ({state, getters, commit, dispatch}) => {
+      state._workerRecords.forEach(wr => {
+        wr.dateRecords.forEach(dr => {
+          if (dr.isUpdated) commit('saveUpdatedDateRecord', dr)
+          if (dr.isNew) commit('saveNewDateRecord', dr)
+        })
+      })
+    },
+    revokeChanges: ({state, getters, commit, dispatch}) => {
+      state._workerRecords.forEach(wr => {
+        commit('deleteNewDateRecords', wr)
+        wr.dateRecords.forEach(dr => {
+          if (dr.isUpdated) commit('revokeDateRecordUpdate', dr)
+        })
+      })
     },
     
     
-    // API
+    // App initialization
     validateWorkerRecords: ({state, dispatch, commit}, workerRecords) => {
       const repsOfWorkerId = getReps(workerRecords, '_id')
       
@@ -145,6 +175,16 @@ export default {
       commit('setLastWorkerRecordDateRecordIds', workerRecords)
     },
 
-    
+    //* debug
+    showDateRecord: ({getters}, evnt) => {
+      const target = evnt.target
+      if (!target.classList.contains('cell') ) return
+
+      const date = target.dataset.date
+      const workerId = target.dataset.workerId
+
+      const dr = getters.findDateRecord({workerId, date})
+      console.log(dr)
+    }
   },
 }
