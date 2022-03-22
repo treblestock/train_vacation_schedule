@@ -1,5 +1,5 @@
 <template>
-   <global-popup
+  <global-popup
     :isShow="$store.getters.isShowNewDateRecordsFormPopup"
     @close-popup="$store.commit('closeNewDateRecordsFromPopup')"
   >

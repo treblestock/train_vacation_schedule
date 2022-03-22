@@ -1,17 +1,5 @@
 <template> 
   <form class="table-sort-and-filter">
-    <app-select v-if="false" 
-      class="form__select"
-      :options="$store.getters.MONTHS"
-      selectName="month"
-      @change="$store.dispatch('updateSearchMonth', $event)"
-    ></app-select>
-    <app-select v-if="false" 
-      class="form__select"
-      :options="$store.getters.DATE_TYPES"
-      selectName="dateType"
-    ></app-select>
-    
     <custom-select 
       class="form__select"
       :options="$store.getters.DATE_TYPES"

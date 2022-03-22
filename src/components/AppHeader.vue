@@ -9,7 +9,7 @@
       >Отмена</button>
     </div>
 
-    <table-sort-filter></table-sort-filter>
+    <table-sort-filter />
   </header>
 </template> 
  

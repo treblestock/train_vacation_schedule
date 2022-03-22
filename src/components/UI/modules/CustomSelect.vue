@@ -45,12 +45,6 @@ import relativePosition from '@/components/directives/relativePosition.js'
 import translate from '@/components/directives/translate.js'
 
 
-// @click="
-//             selectOption(),
-//             multiple ? toggleActive() : (setActive(), closePopup() )
-//           "
-
-
 export default { 
   name: 'custom-select',
   components: {
@@ -80,6 +74,11 @@ export default {
     // allOption() {return this.selectOptions.find(opt => opt.dataset.optionValue == 'all') },
   },
   methods: {
+    onSelect() {
+      !this.multiple 
+        ? (this.setActive(), this.setSelected(), this.closePopup() )
+        : (this.toggleActive(), this.toggleSelected() ) 
+    },
     setActive() {
       this.selectOptions.forEach(option => option.classList.remove('active') )
       event.target.classList.add('active')
@@ -99,11 +98,6 @@ export default {
       const _option = this._select.querySelector(`[value='${selectedValue}']`)
       _option.selected = !_option.selected
       this.$emit('change', this._select.selectedOptions)
-    },
-    onSelect() {
-      !this.multiple 
-        ? (this.setActive(), this.setSelected(), this.closePopup() )
-        : (this.toggleActive(), this.toggleSelected() ) 
     },
 
 

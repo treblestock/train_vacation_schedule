@@ -1,16 +1,16 @@
 <template> 
   <div class="table">
-
     <div class="table__body"
         @mousedown.left="
           startHighlighting({
             evnt: $event,
             operation: 'mark',
           })"
-        @mousedown.left.shift="startHighlighting({
-          evnt: $event,
-          operation: 'unmark',
-        })"
+        @mousedown.left.shift="
+          startHighlighting({
+            evnt: $event,
+            operation: 'unmark',
+          })"
         @mouseup="stopHighlighting($event)"
         @mouseover="highlight($event)"
         @dblclick.left="openNewDateRecordsFromPopup($event)"

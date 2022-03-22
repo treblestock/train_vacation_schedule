@@ -91,10 +91,6 @@ body {
   line-height: 1.2;
 }
 
-#app {
-  z-index: 0;
-}
-
 button,
 select {
   min-width: 100px;
