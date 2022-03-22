@@ -6,7 +6,7 @@
         v-for="date in $store.getters.datesInCurrentMonth" :key="date"
         
         :data-date="date.getTime()"
-      >{{date.getDate()}}</table-cell>
+      >{{toStringFormat(date)}} </table-cell>
     </div>
    </div>
 </template>
@@ -16,6 +16,8 @@ import TableCell from '@/components/TableCell.vue'
 
 // Helpers
 import { mapState, mapGetters, mapActions, mapMutations} from 'vuex'
+import { toStringFormat } from '@/helpers'
+
 
 export default {
   components: {
@@ -23,6 +25,9 @@ export default {
   },
   props: {
     rowHeader: String,
+  },
+  methods: {
+    toStringFormat,
   },
 } 
 </script> 

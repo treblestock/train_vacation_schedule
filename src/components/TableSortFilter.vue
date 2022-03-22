@@ -1,29 +1,39 @@
 <template> 
   <form class="table-sort-and-filter">
-    <app-select 
+    <app-select v-if="false" 
       class="form__select"
-      :options="this.$store.getters.MONTHS"
+      :options="$store.getters.MONTHS"
       selectName="month"
-      @change="this.$store.dispatch('updateSearchMonth', $event)"
+      @change="$store.dispatch('updateSearchMonth', $event)"
     ></app-select>
-    <app-select 
+    <app-select v-if="false" 
       class="form__select"
-      :options="this.$store.getters.DATE_TYPES"
+      :options="$store.getters.DATE_TYPES"
       selectName="dateType"
-      @change="this.$store.dispatch('updateSearchDateType', $event)"
     ></app-select>
-    <multiple-select 
+    
+    <custom-select 
       class="form__select"
-      :options="this.$store.getters.MONTHS"
-      selectName="month"
+      :options="$store.getters.DATE_TYPES"
+      selectName="тип даты"
+      :columns='1'
+      @change="$store.dispatch('updateSearchDateType', $event[0].value)"
+    ></custom-select>
+    <custom-select 
+      class="form__select"
+      :options="$store.getters.DIVISIONS"
+      selectName="отделы"
+      :columns='1'
+      multiple
+      @change="$store.dispatch('updateSearchDivisions', $event)"
+    ></custom-select>
+    <custom-select 
+      class="form__select"
+      :options="$store.getters.MONTHS"
+      selectName="Месяц"
       :columns='3'
-    ></multiple-select>
-    <multiple-select 
-      class="form__select"
-      :options="this.$store.getters.DIVISIONS"
-      selectName="Отделы"
-      :columns='2'
-    ></multiple-select>
+      @change="$store.dispatch('updateSearchMonth', $event[0].value)"
+    ></custom-select>
   </form> 
 </template> 
  

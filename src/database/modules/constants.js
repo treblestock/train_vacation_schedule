@@ -1,4 +1,5 @@
 const DIVISIONS = {
+  all: 'Все',
   topManagment: 'топ менеджмент',
   sales: 'продажи',
   marketing: 'маркетинг',

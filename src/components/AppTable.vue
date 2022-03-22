@@ -13,7 +13,7 @@
         })"
         @mouseup="stopHighlighting($event)"
         @mouseover="highlight($event)"
-        @click.left="openNewDateRecordsFromPopup($event)"
+        @dblclick.left="openNewDateRecordsFromPopup($event)"
     >
       <table-header-row
         :rowHeader="'Работники / ' + $store.getters.searchMonth"

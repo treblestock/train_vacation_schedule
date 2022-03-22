@@ -29,7 +29,10 @@ function toDateObject(dateStr) {
 
 
 function toStringFormat(dateObj) {
-  return dateObj.getDate() + '.' + (dateObj.getMonth + 1)
+  let [date, month] = [dateObj.getDate(), (dateObj.getMonth() + 1) ]
+  date = date < 10 ? '0' + date : date
+  month = month < 10 ? '0' + month : month
+  return date + '.' + month
 }
 
 

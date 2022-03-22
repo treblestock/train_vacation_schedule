@@ -5,7 +5,6 @@ import {
   NEW_DATE_RECORD_FORM_DATE_TYPES
 } from '@/database/index.js'
 import { getMonthDates, monthNumber } from '../../helpers'
-console.log(NEW_DATE_RECORD_FORM_DATE_TYPES)
 
 export default {
   modules: {
@@ -21,6 +20,7 @@ export default {
 
     searchMonth: 'january',
     searchDateType: 'all',
+    searchDivisions: [],
   }), 
   getters: {
     // state dublicates
@@ -31,6 +31,7 @@ export default {
 
     searchMonth: (state) => state.searchMonth,
     searchDateType: (state) => state.searchDateType,
+    searchDivisions: (state) => state.searchDivisions,
     
     // 
     datesInCurrentMonth: (state) => getMonthDates(state.searchMonth),
@@ -41,6 +42,8 @@ export default {
     // public workerRecords  (prepeared for represantation)
     workerRecords: (_, getters) => (workerRecords) => {
       let p = workerRecords
+      p = getters.searchDivisions.includes('all') || !getters.searchDivisions.length
+        ? workerRecords : getters.filterWorkerRecordsByDivisions(workerRecords) 
       return p
     },
     
@@ -48,6 +51,10 @@ export default {
     
     // * dateRecords
     // dateRecords modifications (filters, sorts, formatting)
+    filterWorkerRecordsByDivisions: (_, getters) => (workerRecords) => (
+      workerRecords.filter(wr => getters.searchDivisions.includes(wr.division) )
+    ),
+
     filterDateRecordsByDateType: (_, getters) => (dateRecords) => (
       dateRecords.filter(dr => dr.dateType == getters.searchDateType)
     ),
@@ -61,18 +68,26 @@ export default {
       p = getters.searchMonth             ? getters.filterDateRecordsByMonth(p) : p
       p = getters.searchDateType != 'all' ? getters.filterDateRecordsByDateType(p) : p
       return p
-    },
+    },  
   },
   mutations: {
+    setSearchDivisions: (state, divisions) => state.searchDivisions = divisions,
     setSearchMonth: (state, newMonth) => state.searchMonth = newMonth,
-    setSearchDateType: (state, newDateType) => state.searchDateType = newDateType,
+    setSearchDateType: (state, dateType) => state.searchDateType = dateType,
   },
   actions: {
+    updateSearchDivisions: ({getters, commit}, evnt) => {
+      const divisions = [...evnt].map(option => option.value)
+      commit('setSearchDivisions', divisions)
+      console.log(getters.searchDivisions)
+    },
     updateSearchMonth: ({commit}, evnt) => {
-      commit('setSearchMonth', evnt.target.selectedOptions[0].value)
+      evnt = evnt.isTrusted ? evnt.target.selectedOptions[0].value : evnt
+      commit('setSearchMonth', evnt)
     },
     updateSearchDateType: ({commit}, evnt) => {
-      commit('setSearchDateType', evnt.target.selectedOptions[0].value)
+      evnt = evnt.isTrusted ? evnt.target.selectedOptions[0].value : evnt
+      commit('setSearchDateType', evnt)
     },
   },
 }

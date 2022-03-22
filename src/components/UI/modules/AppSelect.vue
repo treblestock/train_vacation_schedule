@@ -2,7 +2,6 @@
   <select :name='selectName'>
     <option 
       v-for="(optionText, optionValue) in options" :key='optionValue'
-      :optionValue='optionValue'
       :value='optionValue'
       >{{optionText}}</option>
   </select>
@@ -19,6 +18,9 @@ export default {
 </script>
    
 <style scoped> 
+select {
+  display: block;
+}
 option {
   background-color: #fff;
 }

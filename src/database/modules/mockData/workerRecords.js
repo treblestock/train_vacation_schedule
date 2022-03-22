@@ -2,7 +2,7 @@ const workerRecords = [
   {
     "_id":1,
     "workerName":"George Trump",
-    "devision": "accounting",
+    "division": "accounting",
     "dateRecords":[
       {"_id":1,"date":"2021-01-01T00:00:00.000Z","dateType":"vacation","isProven":true},
       {"_id":2,"date":"2021-01-02T00:00:00.000Z","dateType":"vacation","isProven":true},
@@ -197,7 +197,7 @@ const workerRecords = [
   {
     "_id":2,
     "workerName":"Elen Trump",
-    "devision": "marketing",
+    "division": "marketing",
     "dateRecords":[
       {"_id":189,"date":"2021-01-01T00:00:00.000Z","dateType":"vacation","isProven":true},
       {"_id":190,"date":"2021-01-02T00:00:00.000Z","dateType":"vacation","isProven":true},
@@ -399,7 +399,7 @@ const workerRecords = [
   {
     "_id":3,
     "workerName":"Michel Trump",
-    "devision": "sales",
+    "division": "sales",
     "dateRecords":[
       {"_id":384,"date":"2021-01-01T00:00:00.000Z","dateType":"vacation","isProven":true},
       {"_id":385,"date":"2021-01-02T00:00:00.000Z","dateType":"vacation","isProven":true},
@@ -598,7 +598,7 @@ const workerRecords = [
   {
     "_id":4,
     "workerName":"Ann Trump",
-    "devision": "accounting",
+    "division": "accounting",
     "dateRecords":[
       {"_id":576,"date":"2021-01-01T00:00:00.000Z","dateType":"illness","isProven":true},
       {"_id":577,"date":"2021-01-02T00:00:00.000Z","dateType":"illness","isProven":true},
@@ -795,7 +795,7 @@ const workerRecords = [
   {
     "_id":5,
     "workerName":"George Vitkovich",
-    "devision": "topManagment",
+    "division": "topManagment",
     "dateRecords":[
       {"_id":766,"date":"2021-01-01T00:00:00.000Z","dateType":"vacation","isProven":true},
       {"_id":767,"date":"2021-01-02T00:00:00.000Z","dateType":"vacation","isProven":true},
@@ -984,7 +984,7 @@ const workerRecords = [
   {
     "_id":6,
     "workerName":"Elen Vitkovich",
-    "devision": "developers",
+    "division": "developers",
     "dateRecords":[
       {"_id":948,"date":"2021-01-01T00:00:00.000Z","dateType":"illness","isProven":true},
       {"_id":949,"date":"2021-01-02T00:00:00.000Z","dateType":"illness","isProven":true},
@@ -1199,7 +1199,7 @@ const workerRecords = [
   {
     "_id":7,
     "workerName":"Michel Vitkovich",
-    "devision": "marketing",
+    "division": "marketing",
     "dateRecords":[
       {"_id":1156,"date":"2021-01-01T00:00:00.000Z","dateType":"illness","isProven":true},
       {"_id":1157,"date":"2021-01-02T00:00:00.000Z","dateType":"illness","isProven":true},
@@ -1377,7 +1377,7 @@ const workerRecords = [
   {
     "_id":8,
     "workerName":"Ann Vitkovich",
-    "devision": "developers",
+    "division": "developers",
     "dateRecords":[
       {"_id":1327,"date":"2021-01-01T00:00:00.000Z","dateType":"illness","isProven":true},
       {"_id":1328,"date":"2021-01-02T00:00:00.000Z","dateType":"illness","isProven":true},
@@ -1574,7 +1574,7 @@ const workerRecords = [
   {
     "_id":9,
     "workerName":"George Green",
-    "devision": "sales",
+    "division": "sales",
     "dateRecords":[
       {"_id":1517,"date":"2021-01-01T00:00:00.000Z","dateType":"vacation","isProven":true},
       {"_id":1518,"date":"2021-01-02T00:00:00.000Z","dateType":"vacation","isProven":true},
@@ -1789,7 +1789,7 @@ const workerRecords = [
   {
     "_id":10,
     "workerName":"Elen Green",
-    "devision": "topManagment",
+    "division": "topManagment",
     "dateRecords":[
       {"_id":1725,"date":"2021-01-01T00:00:00.000Z","dateType":"illness","isProven":true},
       {"_id":1726,"date":"2021-01-02T00:00:00.000Z","dateType":"illness","isProven":true},
@@ -1998,7 +1998,7 @@ const workerRecords = [
   {
     "_id":11,
     "workerName":"Michel Green",
-    "devision": "developers",
+    "division": "developers",
     "dateRecords":[
       {"_id":1927,"date":"2021-01-01T00:00:00.000Z","dateType":"illness","isProven":true},
       {"_id":1928,"date":"2021-01-02T00:00:00.000Z","dateType":"illness","isProven":true},
@@ -2191,7 +2191,7 @@ const workerRecords = [
   
     "_id":12,
     "workerName":"Ann Green",
-    "devision": "developers",
+    "division": "developers",
     "dateRecords":[
       {"_id":2112,"date":"2021-01-01T00:00:00.000Z","dateType":"vacation","isProven":true},
       {"_id":2113,"date":"2021-01-02T00:00:00.000Z","dateType":"vacation","isProven":true},
@@ -2401,7 +2401,7 @@ const workerRecords = [
   
     "_id":13,
     "workerName":"George Smith",
-    "devision": "sales",
+    "division": "sales",
     "dateRecords":[
       {"_id":2314,"date":"2021-01-01T00:00:00.000Z","dateType":"vacation","isProven":true},
       {"_id":2315,"date":"2021-01-02T00:00:00.000Z","dateType":"vacation","isProven":true},
@@ -2597,7 +2597,7 @@ const workerRecords = [
   
     "_id":14,
     "workerName":"Elen Smith",
-    "devision": "topManagment",
+    "division": "topManagment",
     "dateRecords":[
       {"_id":2502,"date":"2021-01-01T00:00:00.000Z","dateType":"vacation","isProven":true},
       {"_id":2503,"date":"2021-01-02T00:00:00.000Z","dateType":"vacation","isProven":true},
@@ -2802,7 +2802,7 @@ const workerRecords = [
   
     "_id":15,
     "workerName":"Michel Smith",
-    "devision": "sales",
+    "division": "sales",
     "dateRecords":[
       {"_id":2699,"date":"2021-01-01T00:00:00.000Z","dateType":"vacation","isProven":true},
       {"_id":2700,"date":"2021-01-02T00:00:00.000Z","dateType":"vacation","isProven":true},
@@ -2996,7 +2996,7 @@ const workerRecords = [
   {
     "_id":16,
     "workerName":"Ann Smith",
-    "devision": "sales",
+    "division": "sales",
     "dateRecords":[
       {"_id":2886,"date":"2021-01-01T00:00:00.000Z","dateType":"illness","isProven":true},
       {"_id":2887,"date":"2021-01-02T00:00:00.000Z","dateType":"illness","isProven":true},
