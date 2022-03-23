@@ -4,7 +4,7 @@ const {DATE_TYPES, WORKER_NAMES} = require('./mochConstants')
 class WorkerRecord {
   static currentId = 0
   constructor({ name, dateRecords }) {
-    this._id = ++WorkerRecord.currentId
+    this.id = ++WorkerRecord.currentId
     this.name = name
     this.dateRecords = dateRecords
   }
@@ -15,7 +15,7 @@ class DateRecord {
   static currentId = 0
 
   constructor({ date, dateType, isNew = true, isProven = true }) {
-    this._id = ++DateRecord.currentId
+    this.id = ++DateRecord.currentId
     this.date = date
     this.dateType = dateType
     this.isNew = isNew

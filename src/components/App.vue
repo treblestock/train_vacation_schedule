@@ -5,9 +5,18 @@
     :records='workerRecords(_workerRecords)'
   ></app-table>
   
+
 </template>
 
 <script>
+  //TODO: WorkerRecord logic:
+  //TODO: 1) New wr Btn 
+  //TODO: 2) @click.left.ctrl="rename workerRecord"
+  //TODO: 2) @click.right.ctrl="deleteWorkerRecord"
+  //TODO: 3) New Worker record form popup 
+  //TODO: 4) Vuex: renameWorker
+  //TODO: 5) Vuex: createWorkerAndMerge
+  //TODO: 
 import { mapState, mapGetters, mapActions, mapMutations} from 'vuex'
 // Components
 import AppHeader from '@/components/AppHeader.vue'

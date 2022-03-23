@@ -23,9 +23,10 @@
         v-for="workerRecord in records" :key="workerRecord"
 
         :rowHeader="workerRecord.workerName"
-        :workerId="workerRecord._id"
+        :workerId="workerRecord.id"
         :dateRecords="dateRecords(workerRecord.dateRecords)"
       ></table-row>
+
     </div>
   </div>
 
@@ -43,11 +44,14 @@ import TableRow from '@/components/TableRow.vue'
 
 import NewDateRecordsForm from '@/components/NewDateRecordsForm.vue'
 import NewDateRecordsFormPopup from '@/components/NewDateRecordsFormPopup.vue'
+import NewWorkerRecordBtn from '@/components/NewWorkerRecordBtn.vue'
 
 export default { 
   components: {
     TableHeaderRow,
     TableRow,
+
+    NewWorkerRecordBtn,
 
     NewDateRecordsForm,
     NewDateRecordsFormPopup,

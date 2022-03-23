@@ -67,15 +67,15 @@ const {
 
 //   dateRecords.forEach(rec => {
 //     test('valid properties of DateRecord instance', () => {
-//       expect(rec).toHaveProperty('_id',)
+//       expect(rec).toHaveProperty('id',)
 //       expect(rec).toHaveProperty('date',)
 //       expect(rec).toHaveProperty('dateType',)
 //       expect(rec).toHaveProperty('isNew',)
 //       expect(rec).toHaveProperty('isProven',)
   
 //       expect(rec).toBeInstanceOf(DateRecord)
-//       expect(rec._id).not.toBeLessThan(1)
-//       expect(rec._id).toBe(Math.floor(rec._id) )
+//       expect(rec.id).not.toBeLessThan(1)
+//       expect(rec.id).toBe(Math.floor(rec.id) )
 //     })
 //   })
 // })
@@ -85,15 +85,15 @@ const {
 
 //   dateRecords.forEach(rec => {
 //     test('valid properties of DateRecord instance', () => {
-//       expect(rec).toHaveProperty('_id',)
+//       expect(rec).toHaveProperty('id',)
 //       expect(rec).toHaveProperty('date',)
 //       expect(rec).toHaveProperty('dateType',)
 //       expect(rec).toHaveProperty('isNew',)
 //       expect(rec).toHaveProperty('isProven',)
 
 //       expect(rec).toBeInstanceOf(DateRecord)
-//       expect(rec._id).not.toBeLessThan(1)
-//       expect(rec._id).toBe(Math.floor(rec._id) )
+//       expect(rec.id).not.toBeLessThan(1)
+//       expect(rec.id).toBe(Math.floor(rec.id) )
 //     })
 //   })
 // })
@@ -102,13 +102,13 @@ const {
 //   const workerRecordsArr = workerRecordsFabric()
 //   workerRecordsArr.forEach(rec => {
 //     test('valid initialization', () => {
-//       expect(rec).toHaveProperty('_id')
+//       expect(rec).toHaveProperty('id')
 //       expect(rec).toHaveProperty('name')
 //       expect(rec).toHaveProperty('dateRecords')
 
 //       expect(rec).toBeInstanceOf(WorkerRecord)
-//       expect(rec._id).not.toBeLessThan(1)
-//       expect(rec._id).toBe(Math.floor(rec._id) )
+//       expect(rec.id).not.toBeLessThan(1)
+//       expect(rec.id).toBe(Math.floor(rec.id) )
 //     })
 
 //     test('unic dates in workerRecords', () => {
@@ -120,7 +120,7 @@ const {
 
   
 //   test('unic worker id ', () => {
-//     const counts = workerRecordsArr.reduce((counts, rec) => (counts[rec._id] ? counts[rec._id]++ : counts[rec._id] = 1, counts), {})
+//     const counts = workerRecordsArr.reduce((counts, rec) => (counts[rec.id] ? counts[rec.id]++ : counts[rec.id] = 1, counts), {})
 //     const bool = Object.values(counts).every(count => count == 1)
 //     expect(bool).toBe(true)
 //   })
