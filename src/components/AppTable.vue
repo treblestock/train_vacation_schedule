@@ -1,19 +1,22 @@
 <template> 
   <div class="table">
     <div class="table__body"
-        @mousedown.left="
-          startHighlighting({
-            evnt: $event,
-            operation: 'mark',
-          })"
-        @mousedown.left.shift="
-          startHighlighting({
-            evnt: $event,
-            operation: 'unmark',
-          })"
-        @mouseup="stopHighlighting($event)"
-        @mouseover="highlight($event)"
-        @dblclick.left="openNewDateRecordsFromPopup($event)"
+      @mousedown.exact.left.ctrl="openNewWorkerRecordsFromPopup($event)"
+      @mousedown.exact.left.shift.ctrl="deleteWorkerRecord($event)"
+
+      @mousedown.exact.left="
+        startHighlighting({
+          evnt: $event,
+          operation: 'mark',
+        })"
+      @mousedown.exact.left.shift="
+        startHighlighting({
+          evnt: $event,
+          operation: 'unmark',
+        })"
+      @mouseup="stopHighlighting($event)"
+      @mouseover="highlight($event)"
+      @dblclick.exact.left="openNewDateRecordsFromPopup($event)"
     >
       <table-header-row
         :rowHeader="'Работники / ' + $store.getters.searchMonth"
@@ -32,6 +35,7 @@
 
   
   <new-date-records-form-popup />
+  <new-worker-records-form-popup />
 
   
 </template> 
@@ -42,19 +46,16 @@ import { mapState, mapGetters, mapActions, mapMutations } from 'vuex'
 import TableHeaderRow from '@/components/TableHeaderRow.vue'
 import TableRow from '@/components/TableRow.vue'
 
-import NewDateRecordsForm from '@/components/NewDateRecordsForm.vue'
 import NewDateRecordsFormPopup from '@/components/NewDateRecordsFormPopup.vue'
-import NewWorkerRecordBtn from '@/components/NewWorkerRecordBtn.vue'
+import NewWorkerRecordsFormPopup from '@/components/NewWorkerRecordsFormPopup.vue'
 
 export default { 
   components: {
     TableHeaderRow,
     TableRow,
 
-    NewWorkerRecordBtn,
-
-    NewDateRecordsForm,
     NewDateRecordsFormPopup,
+    NewWorkerRecordsFormPopup,
   },
   props: {
     records: [Array, Object],
@@ -70,6 +71,8 @@ export default {
       'startHighlighting',
       'stopHighlighting',
       'openNewDateRecordsFromPopup',
+      'openNewWorkerRecordsFromPopup',
+      'deleteWorkerRecord',
       // debug
       'showDateRecord',
     ]),

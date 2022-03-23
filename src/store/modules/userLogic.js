@@ -1,4 +1,8 @@
 import { arrAdd, arrDiff, arrMult } from "../../helpers"
+import {  
+  NEW_DATE_RECORD_FORM_DATE_TYPES,
+  NEW_WORKER_RECORD_DIVISIONS,
+} from '@/database/index.js'
 
 export default {
   modules: {
@@ -7,6 +11,9 @@ export default {
   
   
   state: () => ({
+    NEW_DATE_RECORD_FORM_DATE_TYPES,
+    NEW_WORKER_RECORD_DIVISIONS,
+
     // cells operations
     markedDates: [],
     markedWorkerIds: [],
@@ -19,16 +26,24 @@ export default {
     isStartHighlighting: false,
     currentOperation: null,
 
-    // new dateRecords or update existing ones form
+    //* new records forms
+    // dateRecords
     isShowNewDateRecordsFormPopup: false,
     newDateRecordsFormOptions: {
       dateType: null,
       cellsOptions: [],
     },
 
+    // workerRecords
+    isShowNewWorkerRecordsFormPopup: false,
+    newWorkerRecordsFormOptions: {
+      workerName: null,
+    },
+
     
   }),
   getters: {
+    
     markedCells: (state, getters) => (
       arrMult(state.markedWorkerIds, state.markedDates)
         .map( ([workerId, date]) => (
@@ -38,7 +53,15 @@ export default {
       arrMult(state.unmarkedWorkerIds, state.unmarkedDates)
         .map( ([workerId, date]) => (
           document.querySelector(`[data-worker-id='${workerId}'][data-date='${date}']`) 
-    ))),
+          ))),
+          
+    //* new records
+    NEW_DATE_RECORD_FORM_DATE_TYPES: (state) => state.NEW_DATE_RECORD_FORM_DATE_TYPES,
+    NEW_WORKER_RECORD_DIVISIONS: (state) => state.NEW_WORKER_RECORD_DIVISIONS,
+    // workerRecords 
+    isShowNewWorkerRecordsFormPopup: (state) => state.isShowNewWorkerRecordsFormPopup,
+    
+    // dateRecords 
     isShowNewDateRecordsFormPopup: (state) => state.isShowNewDateRecordsFormPopup,
 
     cellsOptionsFromChozenCells: (state, getters) =>  state.chozenCells.map(cell => ({
@@ -58,19 +81,31 @@ export default {
     chozenCellsAdd: (state, cells) => (state.chozenCells = arrAdd(state.chozenCells, cells) ),
     chozenCellsRemove: (state, cells) => (state.chozenCells = arrDiff(state.chozenCells, cells) ),
 
-    // new dateRecords or update existing ones form
+    //* new records
+    // workerRecords 
+    openNewWorkerRecordsFromPopup: (state) => state.isShowNewWorkerRecordsFormPopup = true,
+    closeNewWorkerRecordsFromPopup: (state) => state.isShowNewWorkerRecordsFormPopup = false,
+
+    updateNewWorkerRecordsFormOptions: (state, newOptions) => Object.assign(state.newWorkerRecordsFormOptions, newOptions),
+
+    // dateRecords 
     openNewDateRecordsFromPopup: (state) => state.isShowNewDateRecordsFormPopup = true,
     closeNewDateRecordsFromPopup: (state) => state.isShowNewDateRecordsFormPopup = false,
-
 
     updateNewDateRecordsFormOptions: (state, newOptions) => Object.assign(state.newDateRecordsFormOptions, newOptions),
   },
   actions: {
     // Mutations
-    openNewDateRecordsFromPopup: ({state, commit, dispatch}, evnt) => {
+    // new records forms
+    openNewDateRecordsFromPopup: ({commit}, evnt) => {
       evnt.target.classList.contains('marked') ? commit('openNewDateRecordsFromPopup') : false
     },
-    closeNewDateRecordsFromPopup: () => {},
+    closeNewDateRecordsFromPopup: ({commit}) => commit('closeNewDateRecordsFromPopup'),
+    
+    openNewWorkerRecordsFromPopup: ({commit}, evnt) => {
+      evnt.target.classList.contains('row__header') ? commit('openNewWorkerRecordsFromPopup') : false
+    },
+    closeNewWorkerRecordsFromPopup: ({commit}) => commit('closeNewWorkerRecordsFromPopup'),
 
 
     // API
@@ -178,6 +213,23 @@ export default {
       dispatch('updateDateRecords', {dateType, cellsOptions} )
       dispatch('chozenCellsClear')
     },
+    
+    // renameWorkerRecord({}) {},
+    // deleteWorkerRecord({}) {},
+    createAndMergeNewWorkerRecord({dispatch}, evnt) {
+      const form = evnt.target
+      const division = form.elements.division.selectedOptions[0].value
+      const workerName = form.elements.workerName.value
+      dispatch('updateWorkerRecords', {workerName, division} )
+    },
+    
+    deleteWorkerRecord({dispatch}, evnt) {
+      const row__header = evnt.target
+      if(!row__header.classList.contains('row__header') ) return
+      
+      const workerId = row__header.dataset.workerId
+      dispatch('removeWorkerRecord', {workerId})
+    }
     
   },
 }

@@ -10,6 +10,8 @@ export default {
   state: () => ({
     _workerRecords: [],
 
+    _removedWorkerRecords: [],
+
     lastWorkerRecordId: null,
     lastDateRecordId: null,
   }),
@@ -32,7 +34,14 @@ export default {
     },
 
     // records initialization
-    createWorkerRecord: () => ({workerName, workerRecords = []}) => ({workerName, workerRecords}),
+    createWorkerRecord: (state) => ({workerName, division, dateRecords = []}) => ({
+      id: state.lastWorkerRecordId,
+      workerName,
+      division,
+      dateRecords,
+      isNew: true,
+      isProven: false,
+    }),
     createDateRecord: (state) => ({dateType, date}) => ({
       id: state.lastDateRecordId,
       date: new Date(+date),
@@ -56,22 +65,20 @@ export default {
     // TODO: add/remove + Record/s () ...Array.isArray(item) ? item : [item]
     // TODO: unified updateRecord({record: {}, props: {workerName/dateType, } })  // for in
     // worker
-    addWorkerRecord: (state, workerRecord) => state._workerRecords.push(workerRecord),
-    removeWorkerRecords: (state, {workerRecordsToRemove}) => {
-      state._workerRecords = state._workerRecords.filter(wr => !workerRecordsToRemove.includes(wr) )
-    },
+    addWorkerRecord: (state, {workerRecord}) => state._workerRecords.push(workerRecord),
     updateWorkerRecord: (state, {workerRecord, workerName} ) => {
       workerRecord.savedValue ??= {}
       workerRecord.savedValue.workerName = workerRecord.workerName
       workerRecord.workerName = workerName
       workerRecord.isUpdated = true
     },
-    
+    addRemovedWorkerRecords: (state, {workerRecord}) => state._removedWorkerRecords.push(workerRecord),
+    removeWorkerRecord: (state, {workerId}) => {
+      state._workerRecords = state._workerRecords.filter(wr => wr.id != workerId )
+    },
+
     // date
     addDateRecord: (state, {dateRecords, dateRecord}) => dateRecords.push(dateRecord),
-    removeDateRecord: (state, {workerRecord, dateRecord}) => {
-      workerRecord.dateRecords = workerRecord.dateRecords.filter(dr => !dateRecord)
-    },
     updateDateRecord: (state, {dateRecord, dateType}) => {
       dateRecord.savedValue ??= {}
       dateRecord.savedValue.dateType = dateRecord.dateType 
@@ -79,9 +86,17 @@ export default {
       dateRecord.isUpdated = true
     },
 
+    removeDateRecord: (state, {workerRecord, dateRecord}) => {
+      workerRecord.dateRecords = workerRecord.dateRecords.filter(dr => !dateRecord)
+    },
+
 
     //* Save and revoke 
-    // dateRecords
+    // workerRecord
+    restoreRemovedWorkerRecords: (state) => state._workerRecords.push(...state._removedWorkerRecords),
+    clearRemovedWorkerRecords: (state) => state._removedWorkerRecords = [],
+    removeNewWorkerRecords: (state) => state._workerRecords = state._workerRecords.filter(wr => !wr.isNew), 
+    
     saveUpdatedWorkerRecord: (state, workerRecord) => {
       delete workerRecord.savedValue
       delete workerRecord.isNew
@@ -94,8 +109,6 @@ export default {
       delete workerRecord.isNew
       delete workerRecord.isUpdated
     },
-    deleteNewWorkerRecords: (state) => state._workerRecords = state._workerRecords.filter(wr => !wr.isNew), 
-
     // dateRecords
     saveUpdatedDateRecord: (state, dateRecord) => {
       delete dateRecord.savedValue
@@ -112,7 +125,7 @@ export default {
 
     //? very strange case: passing 'wr' and accessing wr.dateRecrods
     //? enables mutations rather than passing wr.dateRecords directly
-    deleteNewDateRecords: (state, wr) => wr.dateRecords = wr.dateRecords.filter(dr => !dr.isNew), 
+    removeNewDateRecords: (state, wr) => wr.dateRecords = wr.dateRecords.filter(dr => !dr.isNew), 
 
     //* record initialization
     incWorkerRecordId: (state) => state.lastWorkerRecordId++,
@@ -138,9 +151,29 @@ export default {
     
     
     // app state api
-    addWorkerRecord: ({getters, commit}, {workerName}) => {
+    restoreRemovedWorkerRecords: ({commit}) => {
+      commit('restoreRemovedWorkerRecords')
+      commit('clearRemovedWorkerRecords')
+    },
+    
+    removeWorkerRecord: {
+      root: true,
+      handler: ({state, getters, commit}, {workerId}) => {
+        const workerRecordToRemove = getters.findWorkerRecord({workerId})
+        commit('addRemovedWorkerRecords', {workerRecord: workerRecordToRemove})
+        commit('removeWorkerRecord', {workerId} )
+      },
+    },
+    updateWorkerRecords: {
+      root: true,
+      handler: ({dispatch}, {workerName, division}) => {
+        dispatch('addWorkerRecord', {workerName, division})
+      },
+    },
+
+    addWorkerRecord: ({getters, commit}, {workerName, division}) => {
       commit('incWorkerRecordId')
-      const newWorkerRecord = getters.createWorkerRecord({workerName})
+      const newWorkerRecord = getters.createWorkerRecord({workerName, division})
       commit('addWorkerRecord', {workerRecord: newWorkerRecord})
     },
 
@@ -166,6 +199,7 @@ export default {
 
     //* save and revoke changes
     _affectChanges: ({state, dispatch}, {operation}) => {
+      dispatch(operation + 'WorkerRecordsChanges')
       state._workerRecords.forEach(wr => {
         dispatch(operation + 'WorkerRecordChanges', {workerRecord: wr})
         wr.dateRecords.forEach(dr => dispatch(operation + 'DateRecordChanges', {dateRecord: dr}) )
@@ -175,12 +209,23 @@ export default {
     revokeChanges: ({dispatch}) => dispatch('_affectChanges', {operation: 'revoke'}),
 
 
+
+    saveWorkerRecordsChanges: ({commit}) => {}, // required for _affectChanges
+
+    revokeWorkerRecordsChanges: ({commit, dispatch}) => {
+      commit('removeNewWorkerRecords')
+      dispatch('restoreRemovedWorkerRecords')
+    },
+
     saveWorkerRecordChanges: ({commit}, {workerRecord}) => {
+      commit('saveUpdatedWorkerRecord', workerRecord)
       commit('saveNewWorkerRecord', workerRecord)
     },
     revokeWorkerRecordChanges: ({commit}, {workerRecord}) => {
-      commit('deleteNewDateRecords', workerRecord)
+      if (workerRecord.isUpdated) commit('revokeWorkerRecordUpdate', workerRecord)
+      if (workerRecord.isNew) commit('removeNewDateRecords', workerRecord)
     },
+
     saveDateRecordChanges: ({commit}, {dateRecord}) => {
       if (dateRecord.isUpdated) commit('saveUpdatedDateRecord', dateRecord)
       if (dateRecord.isNew) commit('saveNewDateRecord', dateRecord)

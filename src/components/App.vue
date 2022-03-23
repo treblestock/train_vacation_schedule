@@ -82,7 +82,8 @@ font-size: 18px;
 -moz-text-size-adjust: 100%;
 -webkit-text-size-adjust: 100%;
 }
-input,button,textarea,select,option{display: inline-block; background: none; cursor: pointer; font-family:inherit; font-size: inherit; line-height: inherit; color: inherit}
+input,button,textarea,select,option{display: inline-block; background: none;font-family:inherit; font-size: inherit; line-height: inherit; color: inherit}
+button,textarea,select,option {cursor: pointer; }
 
 input::-ms-clear{display: none;}
 input[type=checkbox], input[type=radio] {cursor: pointer;}
@@ -101,10 +102,20 @@ body {
 }
 
 button,
-select {
+select
+{
   min-width: 100px;
   padding: 5px 10px;
   background-color: #eee;
+}
+
+input {
+  border: 1px solid deepskyblue;
+  min-width: 50px;
+  padding: 5px 10px;
+}
+input:hover {
+  border: 1px solid coral;
 }
 
 button:hover,

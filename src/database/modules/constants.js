@@ -1,11 +1,12 @@
-const DIVISIONS = {
-  all: 'Все',
+const NEW_WORKER_RECORD_DIVISIONS = {
   topManagment: 'топ менеджмент',
   sales: 'продажи',
   marketing: 'маркетинг',
   accounting: 'бухгалтерия',
   developers: 'разработчики',
 }
+const DIVISIONS = Object.assign({}, {all: 'Все'}, NEW_WORKER_RECORD_DIVISIONS)
+
 
 const MONTHS = {
   january: 'Январь',
@@ -34,7 +35,8 @@ const DATE_TYPES = Object.assign({}, {all: 'Все'}, NEW_DATE_RECORD_FORM_DATE_
 
 export {
   DIVISIONS,
-  
+  NEW_WORKER_RECORD_DIVISIONS,
+
   MONTHS,
   DATE_TYPES,
   NEW_DATE_RECORD_FORM_DATE_TYPES,
