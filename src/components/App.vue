@@ -1,24 +1,17 @@
 <template>
 
   <app-header></app-header>
-  <app-table
+  <app-table class="app__table"
     :records='workerRecords(_workerRecords)'
   ></app-table>
   
-
 </template>
 
 <script>
-  //TODO: _removedDateRecords, restoreRemovedDateRecords:
-  //TODO: 
 import { mapState, mapGetters, mapActions, mapMutations} from 'vuex'
 // Components
 import AppHeader from '@/components/AppHeader.vue'
 import AppTable from '@/components/AppTable.vue'
-
-// Directives
-import relativePosition from '@/components/directives/relativePosition.js'
-import translate from '@/components/directives/translate.js'
 
 // Database 
 import { workerRecordsJSON } from '@/database/index.js'
@@ -29,10 +22,6 @@ export default {
     AppHeader,
     AppTable,
 
-  },
-  directives: {
-    pos: relativePosition,
-    translate,
   },
   computed: {
     ...mapGetters([
@@ -93,6 +82,17 @@ h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight: 400;}
 
 body {
   line-height: 1.2;
+  font-family: 'Raleway', sans-serif;
+  background-color: palegreen;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.app__table {
+  flex: 1 0 auto;
 }
 
 button,
@@ -100,28 +100,29 @@ select
 {
   min-width: 100px;
   padding: 5px 10px;
-  background-color: #eee;
+  background-color: #18a36b;
+  
 }
 
 input {
-  border: 1px solid deepskyblue;
+  border: 1px solid #18a36b;
   min-width: 50px;
   padding: 5px 10px;
 }
-input:hover {
-  border: 1px solid coral;
+input:hover,
+input:active {
+  border: 1px solid #3BA3D0;
 }
 
 button:hover,
 select:hover {
-  background-color: coral;
+  background-color: #63AFD0;
 }
 
 button:active,
 select:active {
-  background-color: tomato;
+  background-color: #3BA3D0;
 }
-
 
 
 </style>

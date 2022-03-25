@@ -1,5 +1,5 @@
 <template> 
-  <header class="header">
+  <header class="header hidden">
     <div class="header__new-data-btns">
       <button class="btn__save" type="button"
         @click="$store.dispatch('saveChanges')"
@@ -25,7 +25,7 @@ export default {
 <style scoped> 
 .header {
   padding: 10px;
-  background-color: aqua;
+  background-color: palegreen;
   display: flex;
   justify-content: space-between;
 }

@@ -34,20 +34,28 @@ export default {
    
 <style scoped>  
 .table-header__row {
-  font-weight: 700;
   display: flex;
-  height: 25px;
+  min-height: 25px;
+
+  background-color: #024A68;
+  color: #fff;
 }
 .row__header {
   flex: 0 0 220px;
   border-bottom: 1px solid #000;
+  padding: 5px 10px;
 }
 
 .row__body {
   display: flex;
-  height: 100%;
 }
 .row__body>* {
 
-} 
+}
+
+.cell {
+  background-color: #024A68;
+  border-top: none;
+  border-bottom: none;
+}
 </style>

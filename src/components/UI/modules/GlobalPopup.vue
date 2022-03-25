@@ -1,6 +1,6 @@
 <template>
   <div class="popup"
-    v-show="isShow"
+    v-if="isShow"
   >
     <div class="popup__bg"
       @click="$emit('closePopup')"
@@ -59,7 +59,7 @@ export default {
 
   border-radius: 10px;
   padding: 20px;
-  background-color: #fff;
+  background-color: palegreen;
 }
 
 

@@ -1,5 +1,5 @@
 <template> 
-  <div class="table">
+  <div class="table" :="$attrs">
     <div class="table__body"
       @mousedown.exact.left.ctrl="openNewWorkerRecordsFromPopup($event)"
       @mousedown.exact.left.ctrl.shift="userRemoveWorkerRecord($event)"
@@ -85,9 +85,7 @@ export default {
 <style scoped> 
 
 .table {
-  border: 1px solid #000;
   overflow: auto;
-
   user-select: none;
 }
 

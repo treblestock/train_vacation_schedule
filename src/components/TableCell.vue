@@ -13,25 +13,26 @@ export default {
   },
   computed: {
     currentClass() { return this.dateType },
-  }
+  },
 } 
 </script> 
    
 <style scoped> 
 
-.cell {
+.cell { 
   width: 60px;
-  height: 100%;
-  border: 1px solid #000;
+  
+  border-left: 1px solid #000;
 
-  padding: 0 5px;
+  padding: 5px 10px;
+  background: #fff;
 }
 
 .vacation {
-  background-color: green;
+  background-color: #006E4A	;
 }
 .illness {
-  background-color: skyblue;
+  background-color: #35D4A0;
 }
 .marked {
   background-color: #666;

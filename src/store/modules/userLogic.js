@@ -76,10 +76,10 @@ export default {
                                 state.markedDates.length = state.markedWorkerIds.length = 0,
     setCurrentOperation: (state, operation) => state.currentOperation = operation ? operation : null,
 
-    chozenCellsSet: (state, cells) => (state.chozenCells = cells ),
-    chozenCellsClear: (state) => (state.chozenCells = [] ),
-    chozenCellsAdd: (state, cells) => (state.chozenCells = arrAdd(state.chozenCells, cells) ),
-    chozenCellsRemove: (state, cells) => (state.chozenCells = arrDiff(state.chozenCells, cells) ),
+    chozenCellsSet: (state, cells) => state.chozenCells = cells,
+    chozenCellsClear: (state) => state.chozenCells = [],
+    chozenCellsAdd: (state, cells) => state.chozenCells = arrAdd(state.chozenCells, cells),
+    chozenCellsRemove: (state, cells) => state.chozenCells = arrDiff(state.chozenCells, cells),
 
     //* new records
     // workerRecords 
@@ -98,12 +98,12 @@ export default {
     // Mutations
     // new records forms
     openNewDateRecordsFromPopup: ({commit}, evnt) => {
-      evnt.target.classList.contains('marked') ? commit('openNewDateRecordsFromPopup') : false
+      if (evnt.target.classList.contains('marked') ) commit('openNewDateRecordsFromPopup')
     },
     closeNewDateRecordsFromPopup: ({commit}) => commit('closeNewDateRecordsFromPopup'),
     
     openNewWorkerRecordsFromPopup: ({commit}, evnt) => {
-      evnt.target.classList.contains('row__header') ? commit('openNewWorkerRecordsFromPopup') : false
+      if (evnt.target.classList.contains('row__header') ) commit('openNewWorkerRecordsFromPopup')
     },
     closeNewWorkerRecordsFromPopup: ({commit}) => commit('closeNewWorkerRecordsFromPopup'),
 
@@ -150,17 +150,17 @@ export default {
       if (!state.unmarkedWorkerIds.includes(workerId) ) state.unmarkedWorkerIds.push(workerId)
       getters.unmarkedCells.forEach(cell => cell.classList.remove('marked'))
 
-      commit('chozenCellsRemove', getters.markedCells)
+      commit('chozenCellsRemove', getters.unmarkedCells)
     },
 
 
-    markDateLine({state, getters, commit}, date) {
+    markDateLine({commit}, date) {
       const markedDates = document.querySelectorAll(`[data-worker-id][data-date='${date}']`)
       markedDates.forEach(cell => cell.classList.add('marked'))
 
       commit('chozenCellsAdd', [...markedDates])
     },
-    markWorkerIdLine({state, getters, commit}, workerId) {
+    markWorkerIdLine({state, commit}, workerId) {
       const markedWorkerIds = document.querySelectorAll(`[data-worker-id='${workerId}'][data-date]`)
       
       if (!state.markedWorkerIds.includes(workerId) ) state.markedWorkerIds.push(workerId)
@@ -168,13 +168,13 @@ export default {
 
       commit('chozenCellsAdd', [...markedWorkerIds])
     },
-    unmarkDateLine({state, getters, commit}, date) {
+    unmarkDateLine({commit}, date) {
       const unmarkedDates = document.querySelectorAll(`[data-worker-id][data-date='${date}']`)
       unmarkedDates.forEach(cell => cell.classList.remove('marked'))
 
       commit('chozenCellsRemove', [...unmarkedDates])
     },
-    unmarkWorkerIdLine({state, getters, commit}, workerId) {
+    unmarkWorkerIdLine({state, commit}, workerId) {
       const unmarkedWorkerIds = document.querySelectorAll(`[data-worker-id='${workerId}'][data-date]`)
       
       if (!state.unmarkedWorkerIds.includes(workerId) ) state.unmarkedWorkerIds.push(workerId)
@@ -184,13 +184,13 @@ export default {
     },
 
   
-    markTable({state, getters, commit}) {
+    markTable({commit}) {
       const allcells = document.querySelectorAll(`[data-worker-id][data-date]`)
       allcells.forEach(cell => cell.classList.add('marked'))
 
       commit('chozenCellsAdd', [...allcells])
     },
-    unmarkTable({state, getters, commit}) {
+    unmarkTable({commit}) {
       const allcells = document.querySelectorAll(`[data-worker-id][data-date]`)
       allcells.forEach(cell => cell.classList.remove('marked'))
 
@@ -199,7 +199,7 @@ export default {
     //  =====================================================================
 
     //* state-api logic
-    chozenCellsClear({state, getters, commit, dispatch}, ) {
+    chozenCellsClear({state, commit}, ) {
       state.chozenCells.forEach(cell => cell.classList.remove('marked') )
       commit('chozenCellsClear')
     }, 

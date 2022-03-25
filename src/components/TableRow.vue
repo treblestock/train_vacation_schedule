@@ -47,16 +47,18 @@ export default {
 <style scoped>  
 .table__row {
   display: flex;
-  height: 25px;
+  min-height: 25px;
+  background-color: #63AFD0;
 }
 .row__header {
   flex: 1 0 220px;
   border-bottom: 1px solid #000;
+  padding: 2px 10px;
 }
 
 .row__body {
   display: flex;
-  height: 100%;
+  border-bottom: .7px solid #000;
 }
 .row__body>* {
 

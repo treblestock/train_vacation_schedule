@@ -7,7 +7,7 @@
       >{{optionText}}</option>
     </select>
 
-    <with-popup v-show='true'>
+    <with-popup v-show="true">
       <template #element>
         <button type="button" 
           @click='isShowOptions = !isShowOptions'
@@ -68,10 +68,8 @@ export default {
   computed: {
     _select() { return this.$refs._select },
     _selectOptions() { return [...this._select.children] },
-    // _allOption() {return this._selectOptions.find(opt => opt.value == 'all') },
     select() { return this.$refs.select },
     selectOptions() { return [...this.$refs.options.children] },
-    // allOption() {return this.selectOptions.find(opt => opt.dataset.optionValue == 'all') },
   },
   methods: {
     onSelect() {
@@ -126,7 +124,7 @@ export default {
   white-space: nowrap;
 }
 .option:hover {
-  background-color: coral;
+  background-color: #63AFD0;
 }
 
 .arrow:after {
@@ -137,7 +135,7 @@ export default {
 }
 
 .active{
-  background-color: tomato;
+  background-color: #3BA3D0;
 }
 
 </style>

@@ -11,7 +11,7 @@
         ></app-select>
         <div class="form__group">
           <div>Введите имя сотрудника:</div>
-          <input type="text" name='workerName'>
+          <input v-focus type="text" name='workerName'>
         </div>
       </div>
 
@@ -24,7 +24,11 @@
 
 
 <script>
+import focus from '@/components/directives/focus.js'
 export default {
+  directives: {
+    focus,
+  }
 }
 </script>
 
@@ -36,6 +40,7 @@ export default {
 
   display: flex;
   flex-direction: column;
+
 }
 .newWorkerRecordsForm__title {
   font-size: 30px;
