@@ -204,32 +204,40 @@ export default {
       commit('chozenCellsClear')
     }, 
 
-    createAndMergeNewDateRecords({state, getters, commit, dispatch, rootGetters}, evnt) {
-      const form = evnt.target
-      const dateType = form.elements.dateType.selectedOptions[0].value
-
-      const cellsOptions = getters.cellsOptionsFromChozenCells
-
-      dispatch('updateDateRecords', {dateType, cellsOptions} )
-      dispatch('chozenCellsClear')
-    },
-    
-    // renameWorkerRecord({}) {},
-    // deleteWorkerRecord({}) {},
-    createAndMergeNewWorkerRecord({dispatch}, evnt) {
+    userAddWorkerRecord({dispatch}, evnt) {
       const form = evnt.target
       const division = form.elements.division.selectedOptions[0].value
       const workerName = form.elements.workerName.value
-      dispatch('updateWorkerRecords', {workerName, division} )
+      dispatch('addWorkerRecord', {workerName, division} )
     },
     
-    deleteWorkerRecord({dispatch}, evnt) {
+    userRemoveWorkerRecord({dispatch}, evnt) {
       const row__header = evnt.target
       if(!row__header.classList.contains('row__header') ) return
       
       const workerId = row__header.dataset.workerId
       dispatch('removeWorkerRecord', {workerId})
-    }
+    },
+
+
+    userAddDateRecords({getters, dispatch}, evnt) {
+      const form = evnt.target
+      const dateType = form.elements.dateType.selectedOptions[0].value
+
+      const cellsOptions = getters.cellsOptionsFromChozenCells
+      
+      dispatch('updateDateRecords', {dateType, cellsOptions} )
+      dispatch('chozenCellsClear')
+    },
+    
+    userRemoveDateRecords({getters, dispatch}, evnt) {
+      if (!evnt.target.classList.contains('marked') ) return
+      
+      const cellsOptions = getters.cellsOptionsFromChozenCells
+      dispatch('removeDateRecords', {cellsOptions} )
+      dispatch('chozenCellsClear')
+    },
+
     
   },
 }
@@ -250,7 +258,7 @@ export default {
 // User.markDates = (Dates, Workers) => [Dates X Workers].forEach(mark)
 // User.markDate = (date) =>  { date.isExists ? find(date) -> update(type, 'marked') : createMarked() }
 // 
-// user.changeType = (chozen, newType) => newType == 'delete' ? records.forEach(remove) : recrods.forEach(changeType() )
+// user.changeType = (chozen, newType) => newType == 'remove' ? records.forEach(remove) : recrods.forEach(changeType() )
 // 
 // 
 // @NATIVE EVENTS

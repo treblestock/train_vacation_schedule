@@ -2,7 +2,7 @@
   <div class="newWorkerRecordsForm">
     <h3 class="newWorkerRecordsForm__title">Выберите тип даты для создания новых записей или обновления существующих</h3>
     <form action="" class="newWorkerRecordsForm__form"
-      @submit.prevent="$store.dispatch('createAndMergeNewDateRecords', $event), $emit('formSubmit')"
+      @submit.prevent="$store.dispatch('userAddDateRecords', $event), $emit('formSubmit')"
     >
       <div class="form__body">
         <app-select

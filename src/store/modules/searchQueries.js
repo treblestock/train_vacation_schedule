@@ -36,27 +36,19 @@ export default {
 
     // * workerRecords
     // workerRecords modifications (filters, sorts, formatting)
+    filterWorkerRecordsUnremoved: () => (workerRecords) => (
+      workerRecords.filter(wr => !wr.isRemoved)
+    ),
     filterWorkerRecordsByDivisions: (_, getters) => (workerRecords) => (
       workerRecords.filter(wr => getters.searchDivisions.includes(wr.division) )
-    ),
-    sortWorkerRecordsByName: () => (workerRecords) => (
-      workerRecords.sort((wrA, wrB) => wrA.name > wrB.name ? 1 : -1 )
-    ),
-    sortWorkerRecordsById: () => (workerRecords) => (
-      workerRecords.sort((wrA, wrB) => wrA.id > wrB.id ? 1 : -1 )
-    ),
-    sortWorkerRecordsByDivisionName: () => (workerRecords) => (
-      workerRecords.sort((wrA, wrB) => wrA.division > wrB.division ? 1 : -1 )
     ),
     
     // public workerRecords  (prepeared for represantation)
     workerRecords: (_, getters) => (workerRecords) => {
       let p = workerRecords
+      p = getters.filterWorkerRecordsUnremoved(p)
       p = getters.searchDivisions.includes('all') || !getters.searchDivisions.length
-        ? workerRecords : getters.filterWorkerRecordsByDivisions(workerRecords) 
-      // let p2 = [...p] // required copy to avoid mutations inside getters
-      // getters.sortWorkerRecordsByDivisionName(p2)
-      // getters.sortWorkerRecordsByName(p2)
+        ? p : getters.filterWorkerRecordsByDivisions(workerRecords) 
       return p
     },
     
@@ -64,7 +56,9 @@ export default {
     
     // * dateRecords
     // dateRecords modifications (filters, sorts, formatting)
-
+    filterDateRecordsUnremoved: () => (dateRecords) => (
+      dateRecords.filter(wr => !wr.isRemoved)
+    ),
     filterDateRecordsByDateType: (_, getters) => (dateRecords) => (
       dateRecords.filter(dr => dr.dateType == getters.searchDateType)
     ),
@@ -75,6 +69,7 @@ export default {
     // public dateRecords  (prepeared for represantation)
     dateRecords: (state, getters,) => dateRecords => {
       let p = dateRecords
+      p = getters.filterDateRecordsUnremoved(p)
       p = getters.searchMonth             ? getters.filterDateRecordsByMonth(p) : p
       p = getters.searchDateType != 'all' ? getters.filterDateRecordsByDateType(p) : p
       return p

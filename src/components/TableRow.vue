@@ -4,17 +4,19 @@
       :data-worker-id="workerId"
     >{{rowHeader}}</div>
     <div class="row__body">
-      <table-cell
-        v-for="date in $store.getters.datesInCurrentMonth" :key="date"
-        :date-type="findDateRecord({
-          dateRecords, 
-          date: date.getTime(),
-        })?.dateType"
-        
-        :data-worker-id="workerId"
-        :data-date="date.getTime()"
-        :id="'' + workerId + date.getTime()"
-      ></table-cell>
+      <transition-group name="list-animation">
+        <table-cell
+          v-for="date in $store.getters.datesInCurrentMonth" :key="date"
+          :date-type="findDateRecord({
+            dateRecords, 
+            date: date.getTime(),
+          })?.dateType"
+          
+          :data-worker-id="workerId"
+          :data-date="date.getTime()"
+          :id="'' + workerId + date.getTime()"
+        ></table-cell>
+      </transition-group>
     </div>
    </div>
 </template>
@@ -58,5 +60,5 @@ export default {
 }
 .row__body>* {
 
-} 
+}
 </style>

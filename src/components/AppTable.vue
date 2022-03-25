@@ -2,7 +2,7 @@
   <div class="table">
     <div class="table__body"
       @mousedown.exact.left.ctrl="openNewWorkerRecordsFromPopup($event)"
-      @mousedown.exact.left.shift.ctrl="deleteWorkerRecord($event)"
+      @mousedown.exact.left.ctrl.shift="userRemoveWorkerRecord($event)"
 
       @mousedown.exact.left="
         startHighlighting({
@@ -17,6 +17,7 @@
       @mouseup="stopHighlighting($event)"
       @mouseover="highlight($event)"
       @dblclick.exact.left="openNewDateRecordsFromPopup($event)"
+      @mousedown.exact.left.alt="userRemoveDateRecords($event)"
     >
       <table-header-row
         :rowHeader="'Работники / ' + $store.getters.searchMonth"
@@ -72,7 +73,8 @@ export default {
       'stopHighlighting',
       'openNewDateRecordsFromPopup',
       'openNewWorkerRecordsFromPopup',
-      'deleteWorkerRecord',
+      'userRemoveWorkerRecord',
+      'userRemoveDateRecords',
       // debug
       'showDateRecord',
     ]),
@@ -88,4 +90,6 @@ export default {
 
   user-select: none;
 }
+
+
 </style>

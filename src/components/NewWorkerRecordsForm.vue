@@ -2,7 +2,7 @@
   <div class="newWorkerRecordsForm">
     <h3 class="newWorkerRecordsForm__title">Выберите имя для создания новой записи сотрудника</h3>
     <form action="" class="newWorkerRecordsForm__form"
-      @submit.prevent="$store.dispatch('createAndMergeNewWorkerRecord', $event), $emit('formSubmit')"
+      @submit.prevent="$store.dispatch('userAddWorkerRecord', $event), $emit('formSubmit')"
     >
       <div class="form__body">
         <app-select
